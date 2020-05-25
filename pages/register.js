@@ -7,6 +7,8 @@ import { Form, Field, InputSubmit } from "../components/ui/Form";
 
 // Con las arrow functions si ponemos parentesis en lugar de llaves el retorno es implicito
 // porlo tanto no ponemos 'return'
+
+// hacer validaciones
 const Register = () => (
 	<div>
 		<Layout>

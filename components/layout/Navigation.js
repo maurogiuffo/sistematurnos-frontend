@@ -18,11 +18,19 @@ const Nav = styled.nav`
 `;
 
 const Navigation = () => {
+	// Segun el usuario que este conectado se le va a  mostrar distintas vistas
+	const user = false;
+
 	return (
 		<Nav>
 			<Link href="/"> Home </Link>
-			<Link href="/schedule"> Agenda </Link>
-			<Link href="/profile"> Mi Perfil </Link>
+
+			{user ? (
+				<>
+					<Link href="/schedule"> Agenda </Link>
+					<Link href="/profile"> Mi Perfil </Link>
+				</>
+			) : null}
 		</Nav>
 	);
 };
