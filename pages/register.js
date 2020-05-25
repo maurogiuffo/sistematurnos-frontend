@@ -1,6 +1,7 @@
 import React from "react";
+import { css } from "@emotion/core";
 import Layout from "../components/layout/Layout";
-import { Form } from "../components/ui/Form";
+import { Form, Field, InputSubmit } from "../components/ui/Form";
 
 //import styled from "@emotion/styled";
 
@@ -11,9 +12,16 @@ const Register = () => (
 		<Layout>
 			{/* Todo lo que se ponga aca será el contenido dinamico querecibira como 
       props el Layout */}
-			<h1> Registro </h1>
+			<h1
+				css={css`
+					text-align: center;
+					margin-top: 5rem;
+				`}
+			>
+				Registro
+			</h1>
 			<Form>
-				<div>
+				<Field>
 					<label htmlFor="name"> Nombre </label>
 					<input
 						type="text"
@@ -21,9 +29,9 @@ const Register = () => (
 						placeholder="Tu nombre"
 						name="name"
 					/>
-				</div>
+				</Field>
 
-				<div>
+				<Field>
 					<label htmlFor="lastname"> Apellido </label>
 					<input
 						type="text"
@@ -31,8 +39,14 @@ const Register = () => (
 						placeholder="Tu apellido"
 						name="lastname"
 					/>
-				</div>
-				<div>
+				</Field>
+
+				<Field>
+					<label htmlFor="birthday"> Fecha de Nacimiento </label>
+					<input type="date" id="birthday" name="birthday" />
+				</Field>
+
+				<Field>
 					<label htmlFor="email"> Email </label>
 					<input
 						type="email"
@@ -40,9 +54,9 @@ const Register = () => (
 						placeholder="Email de contacto"
 						name="email"
 					/>
-				</div>
+				</Field>
 
-				<div>
+				<Field>
 					<label htmlFor="password"> Password </label>
 					<input
 						type="password"
@@ -52,9 +66,9 @@ const Register = () => (
 						minLength="6"
 						maxLength="10"
 					/>
-				</div>
+				</Field>
 
-				<input type="submit" value="Crear Cuenta" />
+				<InputSubmit type="submit" value="Crear Cuenta" />
 			</Form>
 		</Layout>
 	</div>
