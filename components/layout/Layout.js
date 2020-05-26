@@ -1,19 +1,30 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import Header from "./Header";
 import { Global, css } from "@emotion/core";
 import Head from "next/head";
 
-//import { ProfessionalsContext } from "../../context/professionalsContext";
+import { ProfessionalsContext } from "../../context/professionalsContext";
 
 // Este va a ser el componente principal
 //Todo lo que este fuera del <main> es el contenido que se
 // va a repetir en las distintas vistas, como por ej header nav y footer
 
 const Layout = (props) => {
-
-	//const { hola } = useContext(ProfessionalsContext);
-
-	//alert(hola);
+	//const {  } = useContext(ProfessionalsContext);
+////////////////////////// Esto es una prueba ///////////////////
+	const componentDidMount = () => {
+		fetch("http://localhost:8080/costumer", 
+		{ method: "GET" 
+	})
+	.then((response) => response.json())
+	.then((responseJson) => {
+		console.log(responseJson);
+	})
+	.catch((error) => {
+		console.error(error);
+	});
+	}
+	componentDidMount();
 
 	return (
 		<>
