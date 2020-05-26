@@ -10,21 +10,9 @@ import { ProfessionalsContext } from "../../context/professionalsContext";
 // va a repetir en las distintas vistas, como por ej header nav y footer
 
 const Layout = (props) => {
-	//const {  } = useContext(ProfessionalsContext);
+	const {  } = useContext(ProfessionalsContext);
 ////////////////////////// Esto es una prueba ///////////////////
-	const componentDidMount = () => {
-		fetch("http://localhost:8080/costumer", 
-		{ method: "GET" 
-	})
-	.then((response) => response.json())
-	.then((responseJson) => {
-		console.log(responseJson);
-	})
-	.catch((error) => {
-		console.error(error);
-	});
-	}
-	componentDidMount();
+
 
 	return (
 		<>

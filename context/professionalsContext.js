@@ -13,7 +13,7 @@ const ProfessionalsProvider = (props) => {
 	// Y ahi se hace el llamado a la API
 	useEffect(() => {
 		const getProfessionals = async () => {
-			const url = 'http://localhost:8080/costumer';
+			const url = 'http://localhost:8080/costumer/';
 
 			const professionals = await axios.get(url);
 			console.log(professionals);
