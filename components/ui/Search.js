@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
-import { css } from "@emotion/core";
+import Router from "next/router";
 
-const FormStyle = styled.form`
+const Form = styled.form`
 	position: relative;
 `;
 
@@ -34,12 +34,34 @@ const InputSubmit = styled.button`
 
 // Este Search se va a pegar en el Header
 const Search = () => {
+
+	const [ search, setSearch ] = useState('');
+
+	const searchProfessional = e => {
+		e.preventDefault();
+
+		if(search.trim() === '') return null;
+
+		//redireccionar al usuario a /buscar
+		Router.push({
+			pathname:'/search',
+			query: { q : search }
+		})
+
+	}
+
 	return (
-		<FormStyle>
-			<InputText type="text" />
+		<Form
+			onSubmit={ searchProfessional }
+		>
+			<InputText 
+				type="text" 
+				placeholder="Buscar Profesionales"
+				onChange= { e => setSearch(e.target.value)}
+			/>
 
 			<InputSubmit type="submit"> Buscar </InputSubmit>
-		</FormStyle>
+		</Form>
 	);
 };
 

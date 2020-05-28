@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-// estado inicial, que campo vamos a validar y el 3er parametro la funcion que se va ejecutar (login, register...)
+// Tiene 3 param: estado inicial, que campo vamos a validar y el 3er parametro la funcion que se va ejecutar (login, register...)
 const useValidation = (initialState, toValidate, fn ) => {
     
     // lo que el usuario ingrese en los diferentes inputs

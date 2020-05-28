@@ -4,6 +4,8 @@ import Layout from "../components/layout/Layout";
 // En estos componentes tenemos los estilos
 import { Form, Field, InputSubmit, Error } from "../components/ui/Form";
 
+// Para las validaciones de formulario hacemos un hook que viene a ser una especie de funcion 
+// que vamos a reutilizar para todos los formularios que tengamos
 import useValidation from "../hooks/useValidation";
 import validateRegister from "../validation/validateRegister";
 import axios from "axios";
