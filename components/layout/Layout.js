@@ -10,7 +10,7 @@ import { ProfessionalsContext } from "../../context/professionalsContext";
 // va a repetir en las distintas vistas, como por ej header nav y footer
 
 const Layout = (props) => {
-	const {  } = useContext(ProfessionalsContext);
+	//const {  } = useContext(ProfessionalsContext);
 ////////////////////////// Esto es una prueba ///////////////////
 
 

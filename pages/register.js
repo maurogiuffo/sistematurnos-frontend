@@ -6,7 +6,7 @@ import { Form, Field, InputSubmit, Error } from "../components/ui/Form";
 
 import useValidation from "../hooks/useValidation";
 import validateRegister from "../validation/validateRegister";
-
+import axios from "axios";
 //import styled from "@emotion/styled";
 
 // Con las arrow functions si ponemos parentesis en lugar de llaves el retorno es implicito
@@ -33,8 +33,19 @@ const Register = () => {
 	// Extraemos los values ( faltaria el birthday)
 	const { name, lastname, email, password } = values;
 
-	function createAccount() {
-		console.log("creating Acount ... ");
+	async function createAccount() {
+		try {
+			const addProfessionals = async () => {
+				const url = "http://localhost:8080/costumer/";
+	
+				const res = await axios.post(url,{"firstName": name, "lastName": lastname, "username": email, "password": password } );
+				console.log(res);
+			};
+			addProfessionals();
+		} catch (error) {
+			console.log(error)
+		}
+	
 	}
 
 	return (
