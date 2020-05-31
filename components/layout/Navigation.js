@@ -23,7 +23,7 @@ const Navigation = () => {
 
 	return (
 		<Nav>
-			<Link href="/"> Home </Link>
+			<Link href="/index"> Home </Link>
 
 			{user ? (
 				<>

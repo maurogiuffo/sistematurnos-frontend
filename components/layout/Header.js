@@ -47,7 +47,7 @@ const Header = () => {
 						align-items: center;
 					`}
 				>
-					<Link href="/">
+					<Link href="/index">
 						<Logo> ST </Logo>
 					</Link>
 

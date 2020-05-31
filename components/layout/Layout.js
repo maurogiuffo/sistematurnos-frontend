@@ -3,16 +3,14 @@ import Header from "./Header";
 import { Global, css } from "@emotion/core";
 import Head from "next/head";
 
-import { ProfessionalsContext } from "../../context/professionalsContext";
 
 // Este va a ser el componente principal
 //Todo lo que este fuera del <main> es el contenido que se
 // va a repetir en las distintas vistas, como por ej header nav y footer
 
 const Layout = (props) => {
-	//const { firstName, lastName, username  } = useContext(ProfessionalsContext);
-////////////////////////// Esto es una prueba ///////////////////
 
+	
 	return (
 		<>
 			{/* Estilos que se van a aplicar en toda la App por eso globales */}
