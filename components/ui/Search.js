@@ -1,66 +1,84 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "@emotion/styled";
 import Router from "next/router";
+import Button from "../ui/Button";
+
+import { ProfessionalsContext } from "../../context/professionalsContext";
+//import { CategoriesContext } from "../../context/categoriesContext";
 
 const Form = styled.form`
 	position: relative;
 `;
 
-const InputText = styled.input`
+const Select = styled.select`
 	border: 1px solid var(--grey3);
 	padding: 1rem;
-	min-width: 300px;
-`;
-
-const InputSubmit = styled.button`
-	height: 3rem;
-	width: 3rem;
-	display: block;
-	background-size: 4rem;
-	background-image: url("/static/img/search.png");
-	background-repeat: no-repeat;
-	position: absolute;
-	right: 1rem;
-	top: 1px;
-	background-color: white;
-	border: none;
-	/* esto para quitar el texto de la lupa */
-	text-indent: -9999px;
-
-	&:hover {
-		cursor: pointer;
-	}
+	min-width: 200px;
 `;
 
 // Este Search se va a pegar en el Header
 const Search = () => {
 
-	const [ search, setSearch ] = useState('');
+	
+// 	const [search, setSearch] = useState({
+// 		category: "",
+// 	});
 
-	const searchProfessional = e => {
+// 	  // Toma lo que devuelve el create context y tendremos disponible
+//   // todo lo que este en el value
+
+// 	const { categories } = useContext(CategoriesContext);
+// 	const { setSearchProfessionals, setQuery } = useContext(
+// 		ProfessionalsContext
+// 	);
+
+	  // función para leer los contenidos
+	const getProfessionals = (e) => {
 		e.preventDefault();
 
-		if(search.trim() === '') return null;
+		setSearch({
+			...search,
+			[e.target.name]: e.target.value,
+		});
 
 		//redireccionar al usuario a /buscar
 		Router.push({
-			pathname:'/search',
-			query: { q : search }
-		})
-
-	}
+			pathname: "/search",
+			query: { q: search },
+		});
+	};
 
 	return (
 		<Form
-			onSubmit={ searchProfessional }
+			onSubmit={(e) => {
+				e.preventDefault();
+				setSearchProfessionals(search);
+				setQuery(true);
+			}}
 		>
-			<InputText 
-				type="text" 
-				placeholder="Buscar Profesionales"
-				onChange= { e => setSearch(e.target.value)}
-			/>
+			<div>
+				{/* <Select
+					name="category"
+					placeholder="Buscar Profesionales"
+					onChange={(e) => setSearch(e.target.value)}
+				>
+					<option value=""> -- Categorias --</option>
+					{categories.map( category => (
+						<option key="" value="">
+							console.log(category);
+						</option>
+					))}
+				</Select> */}
 
-			<InputSubmit type="submit"> Buscar </InputSubmit>
+				<Button
+					bgColor="true"
+					type="submit"
+					onChange={getProfessionals}
+				>
+					{" "}
+					Buscar{" "}
+				</Button>
+			</div>
 		</Form>
 	);
 };

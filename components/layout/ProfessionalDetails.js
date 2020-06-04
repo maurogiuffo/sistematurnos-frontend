@@ -28,25 +28,20 @@ const Name = styled.a`
 `;
 
 const ProfessionalDetails = ({ professional }) => {
-	const {
-		id_customer,
-		firstName,
-		lastName,
-		username,
-		password,
-	} = professional;
+	const { id_user, firstName, lastName,  email } = professional;
 
 	return (
 		<Content>
 			<Description>
-				<Name>
-					{firstName} {lastName}
-				</Name>
+				<Link href="/professionals/[id]" as={`/professionals/${id_user}`}>
+					<Name>
+						{firstName} {lastName}
+					</Name>
+				</Link>
 				<div>
-					<p>{username}</p>
-          <p>{password}</p>
+					<p>{email}</p>
+					
 				</div>
-				
 			</Description>
 		</Content>
 	);

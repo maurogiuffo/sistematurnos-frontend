@@ -1,15 +1,17 @@
 import App from "next/app";
-import ProfessionalsProvider from '../context/professionalsContext';
+import ProfessionalsProvider from "../context/professionalsContext";
+import CategoriesProvider from "../context/CategoriesContext";
 
 const MyApp = (props) => {
+	const { Component, pageProps } = props;
 
-  const { Component, pageProps } = props;
-
-  return (
-    <ProfessionalsProvider>
-      <Component {...pageProps} />
-    </ProfessionalsProvider>
-  );
+	return (
+		<CategoriesProvider>
+			<ProfessionalsProvider>
+				<Component {...pageProps} />
+			</ProfessionalsProvider>
+		</CategoriesProvider>
+	);
 };
 
 export default MyApp;
