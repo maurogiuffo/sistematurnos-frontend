@@ -4,7 +4,7 @@ import Router from "next/router";
 import Button from "../ui/Button";
 
 import { ProfessionalsContext } from "../../context/professionalsContext";
-//import { CategoriesContext } from "../../context/categoriesContext";
+import { CategoriesContext } from "../../context/categoriesContext";
 
 const Form = styled.form`
 	position: relative;
@@ -18,19 +18,20 @@ const Select = styled.select`
 
 // Este Search se va a pegar en el Header
 const Search = () => {
-
 	
-// 	const [search, setSearch] = useState({
-// 		category: "",
-// 	});
+	const [search, setSearch] = useState({
+		category: "",
+	});
 
-// 	  // Toma lo que devuelve el create context y tendremos disponible
-//   // todo lo que este en el value
+	  // Toma lo que devuelve el create context y tendremos disponible
+  // todo lo que este en el value
 
-// 	const { categories } = useContext(CategoriesContext);
-// 	const { setSearchProfessionals, setQuery } = useContext(
-// 		ProfessionalsContext
-// 	);
+	// VERIFICAR QUE PASA ACÁ
+	const categories  = useContext(CategoriesContext);
+	
+	const { setSearchProfessionals, setQuery } = useContext(
+		ProfessionalsContext
+	);
 
 	  // función para leer los contenidos
 	const getProfessionals = (e) => {
@@ -57,18 +58,18 @@ const Search = () => {
 			}}
 		>
 			<div>
-				{/* <Select
+				{ <Select
 					name="category"
 					placeholder="Buscar Profesionales"
 					onChange={(e) => setSearch(e.target.value)}
 				>
 					<option value=""> -- Categorias --</option>
 					{categories.map( category => (
-						<option key="" value="">
+						<option key="id" value="categoryName">
 							console.log(category);
 						</option>
 					))}
-				</Select> */}
+				</Select> }
 
 				<Button
 					bgColor="true"

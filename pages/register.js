@@ -4,7 +4,7 @@ import Layout from "../components/layout/Layout";
 // En estos componentes tenemos los estilos
 import { Form, Field, InputSubmit, Error } from "../components/ui/Form";
 
-// Para las validaciones de formulario hacemos un hook que viene a ser una especie de funcion 
+// Para las validaciones de formulario hacemos un hook que viene a ser una especie de funcion
 // que vamos a reutilizar para todos los formularios que tengamos
 import useValidation from "../hooks/useValidation";
 import validateRegister from "../validation/validateRegister";
@@ -19,7 +19,7 @@ const Register = () => {
 	const INITIAL_STATE = {
 		name: "",
 		lastname: "",
-		//birthday: "",
+		dni: "",
 		email: "",
 		password: "",
 	};
@@ -33,21 +33,26 @@ const Register = () => {
 	} = useValidation(INITIAL_STATE, validateRegister, createAccount);
 
 	// Extraemos los values ( faltaria el birthday)
-	const { name, lastname, email, password } = values;
+	const { name, lastname, dni, email, password } = values;
 
 	async function createAccount() {
 		try {
 			const addProfessionals = async () => {
 				const url = "http://localhost:8080/costumer/";
-	
-				const res = await axios.post(url,{"firstName": name, "lastName": lastname, "username": email, "password": password } );
+
+				const res = await axios.post(url, {
+					firstName: name,
+					lastName: lastname,
+					dni: dni,
+					email: email,
+					password: password,
+				});
 				console.log(res);
 			};
 			addProfessionals();
 		} catch (error) {
-			console.log(error)
+			console.log(error);
 		}
-	
 	}
 
 	return (
@@ -92,13 +97,18 @@ const Register = () => {
 						/>
 					</Field>
 					{errors.lastname ? <Error>{errors.lastname}</Error> : null}
-					{/* 				
+
 					<Field>
-						<label htmlFor="birthday"> Fecha de Nacimiento </label>
-						<input type="date" id="birthday" name="birthday" 	value={birthday}
+						<label htmlFor="dni"> Fecha de Nacimiento </label>
+						<input
+							type="number"
+							id="dni"
+							name="dni"
+							value={dni}
 							onChange={handleChange}
-							onBlur={handleBlur} />
-					</Field> */}
+							onBlur={handleBlur}
+						/>
+					</Field>
 
 					<Field>
 						<label htmlFor="email"> Email </label>

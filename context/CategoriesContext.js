@@ -13,10 +13,10 @@ const CategoriesProvider = (props) => {
     // ejecutar llamado a la api
     useEffect(() => {
         const getCategories = async () => {
-            const url = 'http://localhost/categories/'
+            const url = 'http://localhost:8080/category/'
         
             const categories = await axios.get(url);
-            console.log(categories);
+           
             setCategories(categories);
         }
         getCategories();
@@ -24,10 +24,11 @@ const CategoriesProvider = (props) => {
     
     return (
         <CategoriesContext.Provider
-            value= {{ // Todos los valores que se van a compartir en todos los componentes
+        
+            value= {{ 
                 categories
             }}
-        >
+        >  
             {props.children} 
         </CategoriesContext.Provider>
     )

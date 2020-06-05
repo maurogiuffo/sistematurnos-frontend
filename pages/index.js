@@ -26,7 +26,7 @@ const Home = () => {
 							? professionals.map((professional) => (
 									// Cuando mapeamos nos pide una key que va a ser un identificador único
 									<ProfessionalDetails
-										key={professional.id_costumer}
+										key={professional.id}
 										professional={professional}
 									/>
 							  ))
