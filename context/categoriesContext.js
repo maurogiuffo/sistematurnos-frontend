@@ -9,26 +9,25 @@ const CategoriesProvider = (props) => {
 
     // crear state del context
     const [ categories, setCategories ] = useState([]);
-
+    
     // ejecutar llamado a la api
     useEffect(() => {
         const getCategories = async () => {
             const url = 'http://localhost:8080/category/'
         
             const categories = await axios.get(url);
-           
-            setCategories(categories);
+            console.log(categories.data);
+            setCategories(categories.data);
         }
         getCategories();
     }, []); // El array vacio para que solo se ejecute una vez para cargar todas las categorias
     
     return (
         <CategoriesContext.Provider
-        
             value= {{ 
                 categories
             }}
-        >  
+        >   
             {props.children} 
         </CategoriesContext.Provider>
     )

@@ -36,7 +36,7 @@ const Logo = styled.p`
 // Este Header se pegará en el Layout
 const Header = () => {
 	// Este usuario va a venir de la Api
-	const user = true;
+	const user = false;
 
 	return (
 		<HeaderContainer>
@@ -50,7 +50,7 @@ const Header = () => {
 					<Link href="/index">
 						<Logo> ST </Logo>
 					</Link>
-
+					
 					<Search />
 
 					<Navigation />

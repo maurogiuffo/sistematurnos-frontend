@@ -16,6 +16,10 @@ const Select = styled.select`
 	min-width: 200px;
 `;
 
+const Container = styled.div`
+	display: block;
+`;
+
 // Este Search se va a pegar en el Header
 const Search = () => {
 	
@@ -26,7 +30,6 @@ const Search = () => {
 	  // Toma lo que devuelve el create context y tendremos disponible
   // todo lo que este en el value
 
-	// VERIFICAR QUE PASA ACÁ
 	const categories  = useContext(CategoriesContext);
 	
 	const { setSearchProfessionals, setQuery } = useContext(
@@ -57,16 +60,18 @@ const Search = () => {
 				setQuery(true);
 			}}
 		>
-			<div>
+			<div
+			
+			> 
 				{ <Select
 					name="category"
 					placeholder="Buscar Profesionales"
 					onChange={(e) => setSearch(e.target.value)}
 				>
 					<option value=""> -- Categorias --</option>
-					{categories.map( category => (
+					{categories.categories.map( category => (
 						<option key="id" value="categoryName">
-							console.log(category);
+							{category.categoryName};
 						</option>
 					))}
 				</Select> }

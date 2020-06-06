@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { css } from "@emotion/core";
+import axios from "axios";
 import Layout from "../components/layout/Layout";
 // En estos componentes tenemos los estilos
 import { Form, Field, InputSubmit, Error } from "../components/ui/Form";
-
 // Para las validaciones de formulario hacemos un hook que viene a ser una especie de funcion
 // que vamos a reutilizar para todos los formularios que tengamos
 import useValidation from "../hooks/useValidation";
 import validateRegister from "../validation/validateRegister";
-import axios from "axios";
+
+import { CategoriesContext } from "../context/categoriesContext";
+
 //import styled from "@emotion/styled";
 
 // Con las arrow functions si ponemos parentesis en lugar de llaves el retorno es implicito
@@ -16,11 +18,18 @@ import axios from "axios";
 
 // hacer validaciones
 const Register = () => {
+
+	const {categories} = useContext(CategoriesContext);
+
+
+	console.log(categories);
 	const INITIAL_STATE = {
 		name: "",
 		lastname: "",
 		dni: "",
 		email: "",
+		usertype: 0,
+		category: "",
 		password: "",
 	};
 
@@ -32,8 +41,10 @@ const Register = () => {
 		handleBlur,
 	} = useValidation(INITIAL_STATE, validateRegister, createAccount);
 
-	// Extraemos los values ( faltaria el birthday)
-	const { name, lastname, dni, email, password } = values;
+	// Extraemos los values 
+	const { name, lastname, dni, email, usertype, category, password } = values;
+	
+
 
 	async function createAccount() {
 		try {
@@ -46,6 +57,8 @@ const Register = () => {
 					dni: dni,
 					email: email,
 					password: password,
+					usertype: usertype,
+					category: category
 				});
 				console.log(res);
 			};
@@ -99,7 +112,7 @@ const Register = () => {
 					{errors.lastname ? <Error>{errors.lastname}</Error> : null}
 
 					<Field>
-						<label htmlFor="dni"> Fecha de Nacimiento </label>
+						<label htmlFor="dni"> Dni </label>
 						<input
 							type="number"
 							id="dni"
@@ -109,6 +122,7 @@ const Register = () => {
 							onBlur={handleBlur}
 						/>
 					</Field>
+					{errors.dni ? <Error>{errors.dni}</Error> : null}
 
 					<Field>
 						<label htmlFor="email"> Email </label>
@@ -123,6 +137,47 @@ const Register = () => {
 						/>
 					</Field>
 					{errors.email ? <Error>{errors.email}</Error> : null}
+
+					<Field>
+							<label htmlFor="usertype">
+								   <input 
+										type="radio" 
+										name={usertype}
+										value="0" 
+										onChange={handleChange}
+										checked={true} />
+           							Cliente
+         					</label>
+       				 
+        					<label htmlFor="usertype">
+								<input 
+									type="radio" 
+									name={usertype}
+									value="1" 
+									onChange={handleChange}
+									
+									/>
+           				 			Profesional
+         					 </label>
+        			
+					</Field>
+					
+
+					{usertype == 1 ? (
+						<Field>
+								{ <Select
+										name="category">
+											<option value=""> -- Categorias --</option>
+												{categories.map( category => (
+											<option key="id" value="categoryName">
+												console.log(category);
+											</option>
+											))}
+								</Select> }	
+						</Field>
+					
+					) : ( null )}
+					
 
 					<Field>
 						<label htmlFor="password"> Password </label>

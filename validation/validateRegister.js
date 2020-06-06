@@ -10,9 +10,9 @@ export default function validateRegister(values) {
          errors.lastname = "El apellido es obligatorio"
      }
      
-    //  if(!values.birthday) {
-    //      errors.birthday = "La fecha de nacimiento es obligatoria"
-    //  }
+     if(!values.dni) {
+         errors.dni = "El DNI es obligatorio"
+     }
 
      if(!values.email) {
          errors.email = "El email es obligatorio"

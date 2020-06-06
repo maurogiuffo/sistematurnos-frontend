@@ -1,6 +1,6 @@
 import App from "next/app";
 import ProfessionalsProvider from "../context/professionalsContext";
-import CategoriesProvider from "../context/CategoriesContext";
+import CategoriesProvider from "../context/categoriesContext";
 
 const MyApp = (props) => {
 	const { Component, pageProps } = props;
