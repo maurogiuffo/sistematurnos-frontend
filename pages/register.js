@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { css } from "@emotion/core";
 import axios from "axios";
 import Layout from "../components/layout/Layout";
@@ -11,24 +11,27 @@ import validateRegister from "../validation/validateRegister";
 
 import { CategoriesContext } from "../context/categoriesContext";
 
-//import styled from "@emotion/styled";
+import styled from "@emotion/styled";
 
 // Con las arrow functions si ponemos parentesis en lugar de llaves el retorno es implicito
 // porlo tanto no ponemos 'return'
 
 // hacer validaciones
 const Register = () => {
+	const Select = styled.select`
+		border: 1px solid var(--grey3);
+		padding: 1rem;
+		min-width: 200px;
+	`;
 
-	const {categories} = useContext(CategoriesContext);
+	const { categories } = useContext(CategoriesContext);
 
-
-	console.log(categories);
 	const INITIAL_STATE = {
 		name: "",
 		lastname: "",
 		dni: "",
 		email: "",
-		usertype: 0,
+		usertype: "0",
 		category: "",
 		password: "",
 	};
@@ -41,15 +44,14 @@ const Register = () => {
 		handleBlur,
 	} = useValidation(INITIAL_STATE, validateRegister, createAccount);
 
-	// Extraemos los values 
+	// Extraemos los values
 	const { name, lastname, dni, email, usertype, category, password } = values;
-	
-
+	console.log({ usertype });
 
 	async function createAccount() {
 		try {
 			const addProfessionals = async () => {
-				const url = "http://localhost:8080/costumer/";
+				const url = "http://localhost:8080/user/";
 
 				const res = await axios.post(url, {
 					firstName: name,
@@ -58,7 +60,7 @@ const Register = () => {
 					email: email,
 					password: password,
 					usertype: usertype,
-					category: category
+					category: category,
 				});
 				console.log(res);
 			};
@@ -139,45 +141,60 @@ const Register = () => {
 					{errors.email ? <Error>{errors.email}</Error> : null}
 
 					<Field>
+						<div>
+	  						{/* MODIFICAR ESTILOS */}
+							<p> Seleccione tipo de Usuario : </p>
 							<label htmlFor="usertype">
-								   <input 
-										type="radio" 
-										name={usertype}
-										value="0" 
-										onChange={handleChange}
-										checked={true} />
-           							Cliente
-         					</label>
-       				 
-        					<label htmlFor="usertype">
-								<input 
-									type="radio" 
-									name={usertype}
-									value="1" 
+								<input
+									type="radio"
+									name="usertype"
+									value="0"
 									onChange={handleChange}
-									
-									/>
-           				 			Profesional
-         					 </label>
-        			
+									checked={usertype == "0"}
+								/>
+								Cliente
+							</label>
+							<label htmlFor="usertype">
+								<input
+									type="radio"
+									name="usertype"
+									value="1"
+									onChange={handleChange}
+									checked={usertype == "1"}
+								/>
+								Profesional
+							</label>
+						</div>
+						{console.log(usertype)}
 					</Field>
-					
 
 					{usertype == 1 ? (
 						<Field>
-								{ <Select
-										name="category">
-											<option value=""> -- Categorias --</option>
-												{categories.map( category => (
-											<option key="id" value="categoryName">
-												console.log(category);
+							{
+								<label htmlFor="category">
+									Categoria :
+									<Select
+										name="category"
+										onChange={handleChange}
+									>
+										<option value="">
+											{" "}
+											-- Categorias --
+										</option>
+										{categories.map((category) => (
+											<option
+												key={category.id}
+												value={category.categoryName}
+											>
+												{console.log(category)}
+												{category.categoryName}
 											</option>
-											))}
-								</Select> }	
+										))}
+									</Select>
+								</label>
+							}
 						</Field>
-					
-					) : ( null )}
-					
+					) : null}
 
 					<Field>
 						<label htmlFor="password"> Password </label>
