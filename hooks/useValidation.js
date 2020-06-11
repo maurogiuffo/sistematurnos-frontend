@@ -28,7 +28,7 @@ const useValidation = (initialState, toValidate, fn ) => {
 
     // funcion que se ejecuta cada vez que el usuario escribe
     const handleChange = e => {
-        e.preventDefault();
+       e.preventDefault();
         setValues({
             // agarramos una copia de los valores
             ...values,

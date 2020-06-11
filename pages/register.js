@@ -14,7 +14,7 @@ import { CategoriesContext } from "../context/categoriesContext";
 import styled from "@emotion/styled";
 
 // Con las arrow functions si ponemos parentesis en lugar de llaves el retorno es implicito
-// porlo tanto no ponemos 'return'
+// por lo tanto no ponemos 'return'
 
 // hacer validaciones
 const Register = () => {
@@ -144,26 +144,33 @@ const Register = () => {
 						<div>
 	  						{/* MODIFICAR ESTILOS */}
 							<p> Seleccione tipo de Usuario : </p>
-							<label htmlFor="usertype">
-								<input
+							<p>
+							<label htmlFor="usertype0">
+								Cliente
+							</label>
+							<input
+									id="usertype0"
 									type="radio"
 									name="usertype"
 									value="0"
 									onChange={handleChange}
 									checked={usertype == "0"}
 								/>
-								Cliente
+							</p>
+							<p>
+							<label htmlFor="usertype1">
+								Profesional
 							</label>
-							<label htmlFor="usertype">
-								<input
+							
+							<input
+									id="usertype1"
 									type="radio"
 									name="usertype"
 									value="1"
 									onChange={handleChange}
 									checked={usertype == "1"}
 								/>
-								Profesional
-							</label>
+							</p>
 						</div>
 						{console.log(usertype)}
 					</Field>

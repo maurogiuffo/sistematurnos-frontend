@@ -71,7 +71,7 @@ const Search = () => {
 					<option value=""> -- Categorias --</option>
 					{categories.categories.map( category => (
 						<option key={category.id} value={category.categoryName}>
-							{category.categoryName};
+							{category.categoryName}
 						</option>
 					))}
 				</Select> }
