@@ -10,7 +10,7 @@ import Head from "next/head";
 
 const Layout = (props) => {
 
-	
+
 	return (
 		<>
 			{/* Estilos que se van a aplicar en toda la App por eso globales */}
@@ -26,7 +26,8 @@ const Layout = (props) => {
 					html {
 						/* para poder utilizar medidas rem como pixeles y hacerlo responsive*/
 						/* En este caso cuando pongamos 1.6 rem seria igual a decir 16px */
-						font-size: 62.5%;
+						/*MODIFIQUE EL FONT SIZE PORQUE INTERFERIA CON LOS ESTILOS DE MATERIAL, PARA RESPONSIVE SE PUEDE FIJAR UN FONT SIZE MAS CHICO Y TODO EL RESTO SE ADAPTA USANDO REM */
+						font-size: 16px;
 						box-sizing: border-box;
 					}
 					*,
@@ -35,7 +36,7 @@ const Layout = (props) => {
 						box-sizing: inherit;
 					}
 					body {
-						font-size: 1.6rem;
+						font-size: 1rem;
 						/* Interlineado */
 						line-height: 1.5;
 						font-family: "PT Sans", sans-serif;
@@ -71,6 +72,8 @@ const Layout = (props) => {
 			<Head>
 				<html lang="es" />
 				<title> Sistema de Turnos </title>
+
+
 				<link
 					rel="stylesheet"
 					href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
@@ -80,6 +83,11 @@ const Layout = (props) => {
 				<link
 					href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Roboto+Slab:wght@400;700&display=swap"
 					rel="stylesheet"
+				/>
+				<link
+					rel="stylesheet"
+					href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+
 				/>
 				<link href="/static/css/app.css" rel="stylesheet" />
 			</Head>

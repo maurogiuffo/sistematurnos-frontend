@@ -9,20 +9,30 @@ import { Form, Field, InputSubmit, Error } from "../components/ui/Form";
 import useValidation from "../hooks/useValidation";
 import validateRegister from "../validation/validateRegister";
 
+
+
 import { CategoriesContext } from "../context/categoriesContext";
 
 import styled from "@emotion/styled";
+
+
+import TextField from '@material-ui/core/TextField';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Radio from '@material-ui/core/Radio';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import {Formik} from 'formik';
 
 // Con las arrow functions si ponemos parentesis en lugar de llaves el retorno es implicito
 // por lo tanto no ponemos 'return'
 
 // hacer validaciones
 const Register = () => {
-	const Select = styled.select`
-		border: 1px solid var(--grey3);
-		padding: 1rem;
-		min-width: 200px;
-	`;
+
 
 	const { categories } = useContext(CategoriesContext);
 
@@ -31,7 +41,7 @@ const Register = () => {
 		lastname: "",
 		dni: "",
 		email: "",
-		usertype: "0",
+		usertype: 0,
 		category: "",
 		password: "",
 	};
@@ -46,7 +56,7 @@ const Register = () => {
 
 	// Extraemos los values
 	const { name, lastname, dni, email, usertype, category, password } = values;
-	console.log({ usertype });
+	console.log( values );
 
 	async function createAccount() {
 		try {
@@ -69,7 +79,6 @@ const Register = () => {
 			console.log(error);
 		}
 	}
-
 	return (
 		<div>
 			<Layout>
@@ -83,6 +92,52 @@ const Register = () => {
 				>
 					Registro
 				</h1>
+
+				<Form onSubmit={handleSubmit} novalidate>
+
+					<TextField id="name" name="name" label="Nombre" placeholder="Tu nombre" onChange={handleChange} onBlur={handleBlur}/>
+
+					<TextField id="lastName" name="lastname" label="Apellido" placeholder="Tu apellido" onChange={handleChange} onBlur={handleBlur}/>
+
+					<TextField id="dni" name="dni" label="D.N.I" placeholder="Tu dni" type="number" onChange={handleChange} onBlur={handleBlur}/>
+
+					<TextField id="email" name="email" label="Email" placeholder="Tu email" type="email" onChange={handleChange} onBlur={handleBlur}/>
+
+					<TextField id="password" name="password" label="Password" placeholder="Tu contraseña" type="password" onChange={handleChange} onBlur={handleBlur}/>
+
+					<FormControl component="fieldset">
+						<FormLabel component="legend">Registrarse como:</FormLabel>
+						<RadioGroup aria-label="Registrarse como:" value={usertype} onChange={handleChange}>
+							<FormControlLabel value="0" checked={usertype === "0"} control={<Radio name="usertype"/>} label="Cliente" />
+							<FormControlLabel value="1" checked={usertype === "1"} control={<Radio name="usertype"/>} label="Profesional" />
+						</RadioGroup>
+					</FormControl>
+
+					{usertype === "1" && (
+
+						<FormControl>
+							<FormLabel id="categoryLabel">Categoria:</FormLabel>
+							<Select
+								labelId="categoryLabel"
+								id="categorySelector"
+								name="category"
+								value={category}
+								onChange={handleChange}
+							>		
+								{categories.map((category) => (
+									<MenuItem key={category.id} value={category.categoryName}> 
+										{category.categoryName}
+								</MenuItem>))}
+							</Select>
+						</FormControl>
+								)}
+					
+				<Button variant="contained" type="submit">Registrarse</Button>
+
+
+				</Form>
+
+				{/* 
 				<Form onSubmit={handleSubmit} novalidate>
 					<Field>
 						<label htmlFor="name"> Nombre </label>
@@ -142,7 +197,7 @@ const Register = () => {
 
 					<Field>
 						<div>
-	  						{/* MODIFICAR ESTILOS */}
+	  						{/* MODIFICAR ESTILOS }
 							<p> Seleccione tipo de Usuario : </p>
 							<p>
 							<label htmlFor="usertype0">
@@ -219,6 +274,7 @@ const Register = () => {
 
 					<InputSubmit type="submit" value="Crear Cuenta" />
 				</Form>
+			*/}
 			</Layout>
 		</div>
 	);

@@ -2,6 +2,8 @@ import styled from "@emotion/styled";
 
 export const Form = styled.form`
 	max-width: 60rem;
+	display: flex;
+	flex-direction: column;
 	width: 95%;
 	margin: 5rem auto 0 auto;
 `;
