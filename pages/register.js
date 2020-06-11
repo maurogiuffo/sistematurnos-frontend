@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { css } from "@emotion/core";
 import axios from "axios";
 import Layout from "../components/layout/Layout";
@@ -9,32 +9,35 @@ import { Form, Field, InputSubmit, Error } from "../components/ui/Form";
 import useValidation from "../hooks/useValidation";
 import validateRegister from "../validation/validateRegister";
 
-
-
 import { CategoriesContext } from "../context/categoriesContext";
 
 import styled from "@emotion/styled";
-
-
-import TextField from '@material-ui/core/TextField';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Radio from '@material-ui/core/Radio';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import Button from '@material-ui/core/Button';
-import {Formik} from 'formik';
+import Router from "next/router";
+import TextField from "@material-ui/core/TextField";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import Radio from "@material-ui/core/Radio";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import Button from "@material-ui/core/Button";
+import { Formik } from "formik";
 
 // Con las arrow functions si ponemos parentesis en lugar de llaves el retorno es implicito
 // por lo tanto no ponemos 'return'
 
 // hacer validaciones
 const Register = () => {
-
-
 	const { categories } = useContext(CategoriesContext);
+
+	useEffect(() => 
+	
+		createAccount()
+
+		(Router.push ('...'))
+
+	, [])
 
 	const INITIAL_STATE = {
 		name: "",
@@ -56,7 +59,7 @@ const Register = () => {
 
 	// Extraemos los values
 	const { name, lastname, dni, email, usertype, category, password } = values;
-	console.log( values );
+	console.log(values);
 
 	async function createAccount() {
 		try {
@@ -70,11 +73,12 @@ const Register = () => {
 					email: email,
 					password: password,
 					usertype: usertype,
-					category: category,
+					category: {"id": category }
 				});
 				console.log(res);
 			};
 			addProfessionals();
+			
 		} catch (error) {
 			console.log(error);
 		}
@@ -94,27 +98,79 @@ const Register = () => {
 				</h1>
 
 				<Form onSubmit={handleSubmit} novalidate>
+					<TextField
+						id="name"
+						name="name"
+						label="Nombre"
+						placeholder="Tu nombre"
+						onChange={handleChange}
+						onBlur={handleBlur}
+					/>
 
-					<TextField id="name" name="name" label="Nombre" placeholder="Tu nombre" onChange={handleChange} onBlur={handleBlur}/>
+					<TextField
+						id="lastName"
+						name="lastname"
+						label="Apellido"
+						placeholder="Tu apellido"
+						onChange={handleChange}
+						onBlur={handleBlur}
+					/>
 
-					<TextField id="lastName" name="lastname" label="Apellido" placeholder="Tu apellido" onChange={handleChange} onBlur={handleBlur}/>
+					<TextField
+						id="dni"
+						name="dni"
+						label="D.N.I"
+						placeholder="Tu dni"
+						type="number"
+						onChange={handleChange}
+						onBlur={handleBlur}
+					/>
 
-					<TextField id="dni" name="dni" label="D.N.I" placeholder="Tu dni" type="number" onChange={handleChange} onBlur={handleBlur}/>
+					<TextField
+						id="email"
+						name="email"
+						label="Email"
+						placeholder="Tu email"
+						type="email"
+						onChange={handleChange}
+						onBlur={handleBlur}
+					/>
 
-					<TextField id="email" name="email" label="Email" placeholder="Tu email" type="email" onChange={handleChange} onBlur={handleBlur}/>
-
-					<TextField id="password" name="password" label="Password" placeholder="Tu contraseña" type="password" onChange={handleChange} onBlur={handleBlur}/>
+					<TextField
+						id="password"
+						name="password"
+						label="Password"
+						placeholder="Tu contraseña"
+						type="password"
+						onChange={handleChange}
+						onBlur={handleBlur}
+					/>
 
 					<FormControl component="fieldset">
-						<FormLabel component="legend">Registrarse como:</FormLabel>
-						<RadioGroup aria-label="Registrarse como:" value={usertype} onChange={handleChange}>
-							<FormControlLabel value="0" checked={usertype === "0"} control={<Radio name="usertype"/>} label="Cliente" />
-							<FormControlLabel value="1" checked={usertype === "1"} control={<Radio name="usertype"/>} label="Profesional" />
+						<FormLabel component="legend">
+							Registrarse como:
+						</FormLabel>
+						<RadioGroup
+							aria-label="Registrarse como:"
+							value={usertype}
+							onChange={handleChange}
+						>
+							<FormControlLabel
+								value="0"
+								checked={usertype === "0"}
+								control={<Radio name="usertype" />}
+								label="Cliente"
+							/>
+							<FormControlLabel
+								value="1"
+								checked={usertype === "1"}
+								control={<Radio name="usertype" />}
+								label="Profesional"
+							/>
 						</RadioGroup>
 					</FormControl>
 
 					{usertype === "1" && (
-
 						<FormControl>
 							<FormLabel id="categoryLabel">Categoria:</FormLabel>
 							<Select
@@ -123,18 +179,22 @@ const Register = () => {
 								name="category"
 								value={category}
 								onChange={handleChange}
-							>		
+							>
 								{categories.map((category) => (
-									<MenuItem key={category.id} value={category.categoryName}> 
+									<MenuItem
+										key={category.id}
+										value={category.id}
+									>
 										{category.categoryName}
-								</MenuItem>))}
+									</MenuItem>
+								))}
 							</Select>
 						</FormControl>
-								)}
-					
-				<Button variant="contained" type="submit">Registrarse</Button>
+					)}
 
-
+					<Button variant="contained" type="submit">
+						Registrarse
+					</Button>
 				</Form>
 
 				{/* 
