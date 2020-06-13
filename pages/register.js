@@ -31,13 +31,6 @@ import { Formik } from "formik";
 const Register = () => {
 	const { categories } = useContext(CategoriesContext);
 
-	useEffect(() => 
-	
-		createAccount()
-
-		(Router.push ('...'))
-
-	, [])
 
 	const INITIAL_STATE = {
 		name: "",
@@ -78,7 +71,8 @@ const Register = () => {
 				console.log(res);
 			};
 			addProfessionals();
-			
+			Router.push('/');
+
 		} catch (error) {
 			console.log(error);
 		}
@@ -106,7 +100,7 @@ const Register = () => {
 						onChange={handleChange}
 						onBlur={handleBlur}
 					/>
-
+					{/* {errors.name ? <Error>{errors.name}</Error> : null} */}
 					<TextField
 						id="lastName"
 						name="lastname"
@@ -115,6 +109,7 @@ const Register = () => {
 						onChange={handleChange}
 						onBlur={handleBlur}
 					/>
+										{/* {errors.lastname ? <Error>{errors.lastname}</Error> : null} */}
 
 					<TextField
 						id="dni"
@@ -125,6 +120,7 @@ const Register = () => {
 						onChange={handleChange}
 						onBlur={handleBlur}
 					/>
+						{/* {errors.dni ? <Error>{errors.dni}</Error> : null} */}
 
 					<TextField
 						id="email"
@@ -135,6 +131,7 @@ const Register = () => {
 						onChange={handleChange}
 						onBlur={handleBlur}
 					/>
+						{/* {errors.email ? <Error>{errors.email}</Error> : null} */}
 
 					<TextField
 						id="password"
@@ -145,6 +142,7 @@ const Register = () => {
 						onChange={handleChange}
 						onBlur={handleBlur}
 					/>
+											{/* {errors.password ? <Error>{errors.password}</Error> : null} */}
 
 					<FormControl component="fieldset">
 						<FormLabel component="legend">
@@ -196,145 +194,7 @@ const Register = () => {
 						Registrarse
 					</Button>
 				</Form>
-
-				{/* 
-				<Form onSubmit={handleSubmit} novalidate>
-					<Field>
-						<label htmlFor="name"> Nombre </label>
-						<input
-							type="text"
-							id="name"
-							placeholder="Tu nombre"
-							name="name"
-							value={name}
-							onChange={handleChange}
-							onBlur={handleBlur}
-						/>
-					</Field>
-
-					{errors.name ? <Error>{errors.name}</Error> : null}
-
-					<Field>
-						<label htmlFor="lastname"> Apellido </label>
-						<input
-							type="text"
-							id="lastname"
-							placeholder="Tu apellido"
-							name="lastname"
-							value={lastname}
-							onChange={handleChange}
-							onBlur={handleBlur}
-						/>
-					</Field>
-					{errors.lastname ? <Error>{errors.lastname}</Error> : null}
-
-					<Field>
-						<label htmlFor="dni"> Dni </label>
-						<input
-							type="number"
-							id="dni"
-							name="dni"
-							value={dni}
-							onChange={handleChange}
-							onBlur={handleBlur}
-						/>
-					</Field>
-					{errors.dni ? <Error>{errors.dni}</Error> : null}
-
-					<Field>
-						<label htmlFor="email"> Email </label>
-						<input
-							type="email"
-							id="email"
-							placeholder="Email de contacto"
-							name="email"
-							value={email}
-							onChange={handleChange}
-							onBlur={handleBlur}
-						/>
-					</Field>
-					{errors.email ? <Error>{errors.email}</Error> : null}
-
-					<Field>
-						<div>
-	  						{/* MODIFICAR ESTILOS }
-							<p> Seleccione tipo de Usuario : </p>
-							<p>
-							<label htmlFor="usertype0">
-								Cliente
-							</label>
-							<input
-									id="usertype0"
-									type="radio"
-									name="usertype"
-									value="0"
-									onChange={handleChange}
-									checked={usertype == "0"}
-								/>
-							</p>
-							<p>
-							<label htmlFor="usertype1">
-								Profesional
-							</label>
-							
-							<input
-									id="usertype1"
-									type="radio"
-									name="usertype"
-									value="1"
-									onChange={handleChange}
-									checked={usertype == "1"}
-								/>
-							</p>
-						</div>
-						{console.log(usertype)}
-					</Field>
-
-					{usertype == 1 ? (
-						<Field>
-							{
-								<label htmlFor="category">
-									Categoria :
-									<Select
-										name="category"
-										onChange={handleChange}
-									>
-										<option value="">
-											{" "}
-											-- Categorias --
-										</option>
-										{categories.map((category) => (
-											<option
-												key={category.id}
-												value={category.categoryName}
-											>
-												{console.log(category)}
-												{category.categoryName}
-											</option>
-										))}
-									</Select>
-								</label>
-							}
-						</Field>
-					) : null}
-
-					<Field>
-						<label htmlFor="password"> Password </label>
-						<input
-							type="password"
-							id="password"
-							placeholder="password"
-							name="password"
-							value={password}
-							onChange={handleChange}
-							onBlur={handleBlur}
-						/>
-					</Field>
-					{errors.password ? <Error>{errors.password}</Error> : null}
-
-					<InputSubmit type="submit" value="Crear Cuenta" />
-				</Form>
-			*/}
+				
 			</Layout>
 		</div>
 	);
