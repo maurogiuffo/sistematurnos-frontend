@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../components/layout/Layout";
 import axios from "axios";
 
@@ -13,7 +13,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
 const Login = () => {
-	//const { categories } = useContext(CategoriesContext);
+	const [ user, setUser ] = useState(null);
 
 	const INITIAL_STATE = {
 		email: "",
@@ -35,7 +35,7 @@ const Login = () => {
 	async function login() {
 		try {
 			const userLogin = async () => {
-				const url = "http://localhost:8080/user/";
+				const url = "http://localhost:8080/login/";
 
 				const res = await axios.post(url, {			
 					email: email,

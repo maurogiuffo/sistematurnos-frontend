@@ -13,8 +13,9 @@ const CategoriesProvider = (props) => {
     // ejecutar llamado a la api
     useEffect(() => {
         const getCategories = async () => {
-            const url = 'http://localhost:8080/category/'
-        
+            //const url = 'http://localhost:8080/category/'
+            const url = " http://localhost:3004/categories/";
+
             const categories = await axios.get(url);
             console.log(categories.data);
             setCategories(categories.data);

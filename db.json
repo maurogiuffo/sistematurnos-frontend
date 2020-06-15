@@ -1,0 +1,68 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "firstName": "Miguel",
+      "lastName": "Asdasd",
+      "password": "fulanito",
+      "usertype": "1",
+      "dni": "5553123112",
+      "email": "miguelito@dasd.com"
+    },
+    {
+      "id": "2",
+      "firstName": "Lalo",
+      "lastName": "Pinto",
+      "password": "fulanito",
+      "usertype": "1",
+      "dni": " 423434534",
+      "email": "lalito@dasd.com"
+    },
+    {
+      "id": "3",
+      "firstName": "Julio",
+      "lastName": "Iglesias",
+      "password": "lalala",
+      "usertype": "0",
+      "dni": " 12334234",
+      "email": "julito@dasd.com"
+    },
+    {
+      "firstName": "Ezequiel",
+      "lastName": "Rebasa",
+      "dni": "3276642",
+      "email": "ezequielrebasa@gmail.com",
+      "password": "ea3rKCAHcMij6",
+      "usertype": "1",
+      "id": "5YjfQ_G"
+    },
+    {
+      "firstName": "Micho",
+      "lastName": "Tito",
+      "dni": "234324",
+      "email": "sdfkskdf@gmail.com",
+      "password": "ea3rKCAHcMij6",
+      "usertype": "0",
+      "id": "qFUvWc8"
+    },
+    {
+      "firstName": "Saul",
+      "lastName": "Goodman",
+      "dni": "23234",
+      "email": "asdas@gmail.com",
+      "password": "lsdfsdfdsf",
+      "usertype": "0",
+      "id": "AICDRw3"
+    }
+  ],
+  "categories": [
+    {
+      "id": "0",
+      "categoryName": "Peluquero"
+    },
+    {
+      "id": "1",
+      "categoryName": "Dentista"
+    }
+  ]
+}

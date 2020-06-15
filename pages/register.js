@@ -57,7 +57,8 @@ const Register = () => {
 	async function createAccount() {
 		try {
 			const addProfessionals = async () => {
-				const url = "http://localhost:8080/user/";
+				//const url = "http://localhost:8080/user/";
+				const url = "http://localhost:3004/users"
 
 				const res = await axios.post(url, {
 					firstName: name,
@@ -66,7 +67,7 @@ const Register = () => {
 					email: email,
 					password: password,
 					usertype: usertype,
-					category: {"id": category }
+					//category: {"id": category }
 				});
 				console.log(res);
 			};
