@@ -58,16 +58,36 @@ const Register = () => {
 		try {
 			const addProfessionals = async () => {
 				const url = "http://localhost:8080/user/";
+				var json= "";
+				if(usertype == '0')
+				{
+					json=
+					{
+						firstName: name,
+						lastName: lastname,
+						dni: dni,
+						email: email,
+						password: password,
+						usertype: usertype
+					}
+				}
 
-				const res = await axios.post(url, {
-					firstName: name,
-					lastName: lastname,
-					dni: dni,
-					email: email,
-					password: password,
-					usertype: usertype,
-					category: {"id": category }
-				});
+				if(usertype == '1')
+					{
+						json=
+						{
+							firstName: name,
+							lastName: lastname,
+							dni: dni,
+							email: email,
+							password: password,
+							usertype: usertype,
+							category: {"id": category }
+						}
+					}
+				
+
+				const res = await axios.post(url, json);
 				console.log(res);
 			};
 			addProfessionals();
