@@ -57,6 +57,7 @@ const Register = () => {
 	async function createAccount() {
 		try {
 			const addProfessionals = async () => {
+<<<<<<< HEAD
 				//const url = "http://localhost:8080/user/";
 				const url = "http://localhost:3004/users"
 
@@ -69,6 +70,39 @@ const Register = () => {
 					usertype: usertype,
 					//category: {"id": category }
 				});
+=======
+				const url = "http://localhost:8080/user/";
+				var json= "";
+				if(usertype == '0')
+				{
+					json=
+					{
+						firstName: name,
+						lastName: lastname,
+						dni: dni,
+						email: email,
+						password: password,
+						usertype: usertype
+					}
+				}
+
+				if(usertype == '1')
+					{
+						json=
+						{
+							firstName: name,
+							lastName: lastname,
+							dni: dni,
+							email: email,
+							password: password,
+							usertype: usertype,
+							category: {"id": category }
+						}
+					}
+				
+
+				const res = await axios.post(url, json);
+>>>>>>> 8e4284033d13f9a11303b1bb6b796af6641e1d0c
 				console.log(res);
 			};
 			addProfessionals();
