@@ -11,7 +11,22 @@ const Search = () => {
 	return (
 		<div>
 			<Layout>
-				<h2> Buscar </h2>
+			<div className="professionals-list">
+				<div className="container">
+					<ul className="bg-white">
+						<h1> Probando Listado </h1>
+						{professionals
+							? professionals.map((professional) => (
+									// Cuando mapeamos nos pide una key que va a ser un identificador único
+									<ProfessionalDetails
+										key={professional.id}
+										professional={professional}
+									/>
+							  ))
+							: null}
+					</ul>
+				</div>
+			</div>
 			</Layout>
 		</div>
 	);

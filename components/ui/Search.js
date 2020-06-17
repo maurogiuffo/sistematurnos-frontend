@@ -32,9 +32,9 @@ const Search = () => {
 
 	const categories  = useContext(CategoriesContext);
 	
-	const { setSearchProfessionals, setQuery } = useContext(
-		ProfessionalsContext
-	);
+	// const { setSearchProfessionals, setQuery } = useContext(
+	// 	ProfessionalsContext
+	// );
 
 	  // función para leer los contenidos
 	const getProfessionals = (e) => {

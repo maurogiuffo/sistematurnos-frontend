@@ -28,7 +28,8 @@ const Name = styled.a`
 `;
 
 const ProfessionalDetails = ({ professional }) => {
-	const { id_user, firstName, lastName,  email } = professional;
+	console.log(professional);
+	const { id_user, firstName, lastName, email } = professional;
 
 	return (
 		<Content>
@@ -39,8 +40,10 @@ const ProfessionalDetails = ({ professional }) => {
 					</Name>
 				</Link>
 				<div>
-					<p>{email}</p>
-					
+					<p>{email}</p>	
+				</div>
+				<div>
+					<p></p>
 				</div>
 			</Description>
 		</Content>
