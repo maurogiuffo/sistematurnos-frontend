@@ -28,13 +28,14 @@ const Name = styled.a`
 `;
 
 const ProfessionalDetails = ({ professional }) => {
+
+	const { id, firstName, lastName, email } = professional;
 	console.log(professional);
-	const { id_user, firstName, lastName, email } = professional;
 
 	return (
 		<Content>
 			<Description>
-				<Link href="/professionals/[id]" as={`/professionals/${id_user}`}>
+				<Link href="/professionals/[id]" as={`/professionals/${id}`}>
 					<Name>
 						{firstName} {lastName}
 					</Name>

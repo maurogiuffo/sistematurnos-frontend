@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import styled from "@emotion/styled";
 import Router from "next/router";
-import Button from "../ui/Button";
+import Button from "@material-ui/core/Button";
 
-import { ProfessionalsContext } from "../../context/professionalsContext";
+import { UsersContext } from "../../context/usersContext";
 import { CategoriesContext } from "../../context/categoriesContext";
 
 const Form = styled.form`
@@ -39,11 +39,12 @@ const Search = () => {
 	  // función para leer los contenidos
 	const getProfessionals = (e) => {
 		e.preventDefault();
-
-		setSearch({
-			...search,
-			[e.target.name]: e.target.value,
-		});
+		
+		if (search.trim() === "")  return ;
+		// setSearch({
+		// 	...search,
+		// 	[e.target.name]: e.target.value,
+		// });
 
 		//redireccionar al usuario a /buscar
 		Router.push({
@@ -54,11 +55,7 @@ const Search = () => {
 
 	return (
 		<Form
-			onSubmit={(e) => {
-				e.preventDefault();
-				setSearchProfessionals(search);
-				setQuery(true);
-			}}
+			onSubmit={getProfessionals}
 		>
 			<div
 			
@@ -76,14 +73,9 @@ const Search = () => {
 					))}
 				</Select> }
 
-				<Button
-					bgColor="true"
-					type="submit"
-					onChange={getProfessionals}
-				>
-					{" "}
-					Buscar{" "}
-				</Button>
+				<Button variant="contained" type="submit">
+						Buscar
+					</Button>
 			</div>
 		</Form>
 	);

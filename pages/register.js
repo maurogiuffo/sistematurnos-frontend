@@ -52,25 +52,11 @@ const Register = () => {
 
 	// Extraemos los values
 	const { name, lastname, dni, email, usertype, category, password } = values;
-	console.log(values);
+
 
 	async function createAccount() {
 		try {
 			const addProfessionals = async () => {
-<<<<<<< HEAD
-				//const url = "http://localhost:8080/user/";
-				const url = "http://localhost:3004/users"
-
-				const res = await axios.post(url, {
-					firstName: name,
-					lastName: lastname,
-					dni: dni,
-					email: email,
-					password: password,
-					usertype: usertype,
-					//category: {"id": category }
-				});
-=======
 				const url = "http://localhost:8080/user/";
 				var json= "";
 				if(usertype == '0')
@@ -102,8 +88,7 @@ const Register = () => {
 				
 
 				const res = await axios.post(url, json);
->>>>>>> 8e4284033d13f9a11303b1bb6b796af6641e1d0c
-				console.log(res);
+
 			};
 			addProfessionals();
 			Router.push('/');

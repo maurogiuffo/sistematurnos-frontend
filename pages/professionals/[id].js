@@ -1,10 +1,44 @@
-import React from 'react';
+import React, { useEffect, useContext, useState } from "react";
+import { useRouter } from "next/router";
+import ProfessionalDetails from "../../components/layout/ProfessionalDetails";
+import Error404 from "../../components/layout/Error404";
+import axios from "axios";
 
 const Professional = () => {
-    return ( 
+    const [professional, setProfessional] = useState({});
+    const [ error, setError ] = useState(false);
+	const router = useRouter();
+	//console.log(router);
+	const {
+		query: { id },
+	} = router;
 
-        <h1> Desde [id].js </h1>
-     );
-}
- 
+	console.log(id);
+	useEffect(() => {
+		if (id) {
+            try {
+                const profQuery = async () => {
+                    const url = `http://localhost:8080/user/${id}`;
+                    const getProfessional = await axios.get(url);
+                    setProfessional(getProfessional.data);
+                    console.log(getProfessional.data);
+                    
+                };
+                profQuery();
+            } catch (error) {
+                // Hay que controlar el error cuando se ingresa un id inexistente desde la url
+                console.log(error);
+            }
+			
+		}
+	}, [id]);
+
+	return (
+		<>
+			<h1> Desde Ficha de Profesional </h1>
+			<ProfessionalDetails professional={professional} />
+		</>
+	);
+};
+
 export default Professional;

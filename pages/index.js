@@ -4,15 +4,15 @@ import Layout from "../components/layout/Layout";
 
 // Entonces en este index que es el que primero se va a cargar cuando
 // ejecutemos el servidor pegamos el Layout
-import { ProfessionalsContext } from "../context/professionalsContext";
 import ProfessionalDetails from "../components/layout/ProfessionalDetails";
+import { UsersContext } from "../context/usersContext";
 
 //import styled from "@emotion/styled";
 
 // Con las arrow functions si ponemos parentesis en lugar de llaves el retorno es implicito
 // porlo tanto no ponemos 'return'
 const Home = () => {
-	const { professionals } = useContext(ProfessionalsContext);
+	const { professionals } = useContext(UsersContext);
 
 	return (
 		<Layout>

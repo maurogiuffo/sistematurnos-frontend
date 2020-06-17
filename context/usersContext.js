@@ -13,27 +13,35 @@ const UsersProvider = (props) => {
 	// Una vez que se cargue este context en el que estamos se va a ejecutar el useEffect
 	// Y ahi se hace el llamado a la API
 	useEffect(() => {
-		const getUsers = async () => {
-			const url = "http://localhost:8080/user/";
+		try {
+			const getUsers = async () => {
+				const url = "http://localhost:8080/user/";
 
-			const users = await axios.get(url);
-			console.log(users);
-			setUsers(users.data);
+				const users = await axios.get(url);
 
-			const getProfessionals = users.data.filter(
-				(user) => user.usertype === "PROFESSIONAL"
-			);
+				setUsers(users.data);
 
-			setProfessionals(getProfessionals);
-			console.log(professionals);
+				const getProfessionals = users.data.filter(
+					(user) => user.usertype === "PROFESSIONAL"
+				);
 
-			const getClients = users.data.filter(
-				(user) => user.usertype === "CUSTOMER"
-			);
-			setClients(getClients);
-			console.log(clients);
-		};
-		getUsers();
+				setProfessionals(getProfessionals);
+
+				const getClients = users.data.filter(
+					(user) => user.usertype === "CUSTOMER"
+				);
+				setClients(getClients);
+			};
+			getUsers();
+			{
+				console.log(professionals);
+			}
+			{
+				console.log(clients);
+			}
+		} catch (error) {
+			console.log(error);
+		}
 	}, []);
 
 	return (

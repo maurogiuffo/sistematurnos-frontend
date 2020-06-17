@@ -1,16 +1,16 @@
 import App from "next/app";
-import ProfessionalsProvider from "../context/professionalsContext";
+import UsersProvider from "../context/usersContext";
 import CategoriesProvider from "../context/categoriesContext";
-import { AuthContext } from "../context/authContext";
+//import { AuthContext } from "../context/authContext";
 
 const MyApp = (props) => {
 	const { Component, pageProps } = props;
 
 	return (
 		<CategoriesProvider>
-			<ProfessionalsProvider>
+			<UsersProvider>
 					<Component {...pageProps} />	
-			</ProfessionalsProvider>
+			</UsersProvider>
 		</CategoriesProvider>
 	);
 };
