@@ -37,6 +37,7 @@ const Professional = () => {
 		<>
 			<h1> Desde Ficha de Profesional </h1>
 			<ProfessionalDetails professional={professional} />
+			<h2> Aca se mostraria la agenda con disponibilidad de turnos </h2>
 		</>
 	);
 };

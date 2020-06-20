@@ -17,9 +17,10 @@ const Search = () => {
 	console.log(categories);
 
 	useEffect(() => {
-		const getProfessionals = categories.filter((category) =>
+		const getProfessionals =  categories.filter((category) =>
 			category.categoryName.includes(q)
 		);
+		console.log(getProfessionals);
 		setProfessionals(getProfessionals[0].users);
 	}, [q,categories]);
 
