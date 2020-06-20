@@ -67,6 +67,7 @@ const Register = () => {
 						lastName: lastname,
 						dni: dni,
 						email: email,
+						username: email,
 						password: password,
 						usertype: usertype
 					}
@@ -80,6 +81,7 @@ const Register = () => {
 							lastName: lastname,
 							dni: dni,
 							email: email,
+							username: email,
 							password: password,
 							usertype: usertype,
 							category: {"id": category }
@@ -91,7 +93,7 @@ const Register = () => {
 
 			};
 			addProfessionals();
-			Router.push('/');
+			Router.push('/login');
 
 		} catch (error) {
 			console.log(error);
