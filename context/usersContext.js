@@ -13,36 +13,64 @@ const UsersProvider = (props) => {
 	// Una vez que se cargue este context en el que estamos se va a ejecutar el useEffect
 	// Y ahi se hace el llamado a la API
 	useEffect(() => {
-		try {
-			const getUsers = async () => {
-				const url = "http://localhost:8080/user/";
+		const CancelToken = axios.CancelToken;
+		const source = CancelToken.source();
 
-				const users = await axios.get(url);
-
-				setUsers(users.data);
-
-				const getProfessionals = users.data.filter(
-					(user) => user.usertype === "PROFESSIONAL"
-				);
-
-				setProfessionals(getProfessionals);
-
-				const getClients = users.data.filter(
-					(user) => user.usertype === "CUSTOMER"
-				);
-				setClients(getClients);
-			};
-			getUsers();
-			{
-				console.log(professionals);
+		const getUsers = () => {
+			const url = "http://localhost:8080/user/";
+			try {
+				axios.get(url, { cancelToken: source.token }).then((data) => {
+					setUsers(data.data);
+				});
+			} catch (error) {
+				if (axios.isCancel(error)) {
+					console.log("cancelled");
+				} else {
+					throw error;
+				}
 			}
-			{
-				console.log(clients);
-			}
-		} catch (error) {
-			console.log(error);
+		};
+		getUsers();
+		if(users) {
+			
+			const getProfessionals = users.filter(
+				(user) => user.usertype === "PROFESSIONAL"
+			);
+
+			setProfessionals(getProfessionals);
+
+			const getClients = users.filter(
+				(user) => user.usertype === "CUSTOMER"
+			);
+			setClients(getClients);
 		}
+
+		return () => {
+			source.cancel();
+		};
 	}, []);
+
+	/* const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
+
+    const loadData = () => {
+      try {
+        axios.get(RANDOM_USER_API, { cancelToken: source.token }).then(data => {
+          setUser(data.data);
+        });
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log("cancelled");
+        } else {
+          throw error;
+        }
+      }
+    };
+
+    loadData();
+    return () => {
+      source.cancel();
+    };*/
 
 	return (
 		// todo lo que se incluya aca es lo que se va a enviar
