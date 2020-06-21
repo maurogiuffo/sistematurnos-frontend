@@ -1,10 +1,11 @@
-import React from "react";
+import React, { createContext, useState, useEffect } from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import { css } from "@emotion/core";
 import Search from "../ui/Search";
 import Navigation from "./Navigation";
 import Button from "../ui/Button";
+
 
 const HeaderContainer = styled.header`
 	/* Aca estamos usando un color que establecimos de manera global en el Layout */
@@ -36,7 +37,16 @@ const Logo = styled.p`
 // Este Header se pegará en el Layout
 const Header = () => {
 	// Este usuario va a venir de la Api
-	const user = false;
+	
+	var isLogged;
+	var user;
+	useEffect(() => {
+		 isLogged = localStorage.getItem("isLogged");
+		 user = localStorage.getItem("user");
+
+		 console.log("isLogged " + isLogged);
+
+	}, []);
 
 	return (
 		<HeaderContainer>
@@ -62,17 +72,20 @@ const Header = () => {
 						align-items: center;
 					`}
 				>
-					{user ? (
+					{isLogged ? (
 						<>
 							<p
 								css={css`
 									margin-right: 2rem;
 								`}
 							>
-								Hola: Eze
+								<Link href="/logout">
+								<Button bgColor="true">Logout</Button>
+							</Link>
+								Hola: {user.firstName + " " + user.lastName}
 							</p>
 
-							<Button bgColor="true"> Cerrar Sesión </Button>
+						
 						</>
 					) : (
 						<>

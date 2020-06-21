@@ -31,7 +31,6 @@ import { Formik } from "formik";
 const Register = () => {
 	const { categories } = useContext(CategoriesContext);
 
-
 	const INITIAL_STATE = {
 		name: "",
 		lastname: "",
@@ -87,10 +86,7 @@ const Register = () => {
 							category: {"id": category }
 						}
 					}
-				
-
 				const res = await axios.post(url, json);
-
 			};
 			addProfessionals();
 			Router.push('/login');

@@ -19,13 +19,14 @@ const Nav = styled.nav`
 
 const Navigation = () => {
 	// Segun el usuario que este conectado se le va a  mostrar distintas vistas
-	const user = true;
+
+	const isLogged =false //localStorage.getItem("isLogged");
 
 	return (
 		<Nav>
 			<Link href="/index"> Home </Link>
 
-			{user ? (
+			{isLogged ? (
 				<>
 					<Link href="/schedule"> Agenda </Link>
 					<Link href="/profile"> Mi Perfil </Link>

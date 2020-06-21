@@ -30,19 +30,28 @@ const Login = () => {
 
 	// Extraemos los values
 	const {email, password } = values;
-	console.log(values);
 
 	async function login() {
 		try {
+
+			console.log('haciendo login');
+
 			const userLogin = async () => {
 				const url = "http://localhost:8080/login/";
-
+				
 				const res = await axios.post(url, {			
 					email: email,
 					password: password,
 				});
-				console.log(res);
+
+				localStorage.setItem("authorization", res.data.token);
+				localStorage.setItem("user", JSON.stringify(res.data.user));
+				localStorage.setItem("firstName", res.data.user.firstName);
+				localStorage.setItem("lastName", res.data.user.lastName);
+				localStorage.setItem("email", res.data.user.email);
+				localStorage.setItem("isLogged", true);
 			};
+
 			userLogin();
 			Router.push('/');
 
@@ -66,9 +75,7 @@ const Login = () => {
 					Login
 				</h1>
 
-				<Form onSubmit={handleSubmit} novalidate>
-			
-
+				<Form onSubmit={login} novalidate>
 					<TextField
 						id="email"
 						name="email"
