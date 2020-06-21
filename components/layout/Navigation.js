@@ -18,10 +18,9 @@ const Nav = styled.nav`
 `;
 
 const Navigation = () => {
-	// Segun el usuario que este conectado se le va a  mostrar distintas vistas
-
-	const isLogged =false //localStorage.getItem("isLogged");
-
+	// Segun el usuario que este conectado se le va a  mostrar distintas vista
+	const isLogged = sessionStorage.getItem("isLogged");
+	
 	return (
 		<Nav>
 			<Link href="/index"> Home </Link>

@@ -13,7 +13,6 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
 const Login = () => {
-	const [ user, setUser ] = useState(null);
 
 	const INITIAL_STATE = {
 		email: "",
@@ -44,12 +43,12 @@ const Login = () => {
 					password: password,
 				});
 
-				localStorage.setItem("authorization", res.data.token);
-				localStorage.setItem("user", JSON.stringify(res.data.user));
-				localStorage.setItem("firstName", res.data.user.firstName);
-				localStorage.setItem("lastName", res.data.user.lastName);
-				localStorage.setItem("email", res.data.user.email);
-				localStorage.setItem("isLogged", true);
+				sessionStorage.setItem("authorization", res.data.token);
+				sessionStorage.setItem("user", JSON.stringify(res.data.user));
+				sessionStorage.setItem("firstName", res.data.user.firstName);
+				sessionStorage.setItem("lastName", res.data.user.lastName);
+				sessionStorage.setItem("email", res.data.user.email);
+				sessionStorage.setItem("isLogged", true);
 			};
 
 			userLogin();

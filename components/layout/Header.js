@@ -5,7 +5,7 @@ import { css } from "@emotion/core";
 import Search from "../ui/Search";
 import Navigation from "./Navigation";
 import Button from "../ui/Button";
-
+import { Router } from "next/router";
 
 const HeaderContainer = styled.header`
 	/* Aca estamos usando un color que establecimos de manera global en el Layout */
@@ -37,16 +37,23 @@ const Logo = styled.p`
 // Este Header se pegará en el Layout
 const Header = () => {
 	// Este usuario va a venir de la Api
-	
-	var isLogged;
-	var user;
+	const [user, setUser] = useState(undefined);
+	const [isLogged, setIsLogged] = useState(undefined);
+
+	const logout = (e) => {
+		console.log("Hola")
+		e.preventDefault();
+		setIsLogged(false);
+		sessionStorage.clear();	
+	}
+
 	useEffect(() => {
-		 isLogged = localStorage.getItem("isLogged");
-		 user = localStorage.getItem("user");
-
-		 console.log("isLogged " + isLogged);
-
+		console.log("se ejecuta effect");
+		setIsLogged(sessionStorage.getItem("isLogged") || false);
+		setUser(sessionStorage.getItem("user") || {});
 	}, []);
+	console.log(`Is Logged ${isLogged}`);
+	console.log(`User ${user}`);
 
 	return (
 		<HeaderContainer>
@@ -60,7 +67,7 @@ const Header = () => {
 					<Link href="/index">
 						<Logo> ST </Logo>
 					</Link>
-					
+
 					<Search />
 
 					<Navigation />
@@ -79,13 +86,10 @@ const Header = () => {
 									margin-right: 2rem;
 								`}
 							>
-								<Link href="/logout">
-								<Button bgColor="true">Logout</Button>
-							</Link>
-								Hola: {user.firstName + " " + user.lastName}
+								Hola:{user.firstName}
 							</p>
 
-						
+							<Button bgColor="true"  onClick={logout} >Logout</Button>
 						</>
 					) : (
 						<>
