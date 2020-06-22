@@ -40,20 +40,17 @@ const Header = () => {
 	const [user, setUser] = useState(undefined);
 	const [isLogged, setIsLogged] = useState(undefined);
 
-	const logout = (e) => {
-		console.log("Hola")
-		e.preventDefault();
+	const logout = (e) => {	
 		setIsLogged(false);
-		sessionStorage.clear();	
 	}
 
 	useEffect(() => {
-		console.log("se ejecuta effect");
+	
 		setIsLogged(sessionStorage.getItem("isLogged") || false);
 		setUser(sessionStorage.getItem("user") || {});
+		sessionStorage.setItem("isLogged", isLogged);
 	}, []);
-	console.log(`Is Logged ${isLogged}`);
-	console.log(`User ${user}`);
+	
 
 	return (
 		<HeaderContainer>

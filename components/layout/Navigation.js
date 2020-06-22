@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
 
@@ -19,8 +19,13 @@ const Nav = styled.nav`
 
 const Navigation = () => {
 	// Segun el usuario que este conectado se le va a  mostrar distintas vista
-	const isLogged = sessionStorage.getItem("isLogged");
-	
+	//const isLogged = sessionStorage.getItem("isLogged");
+	const [isLogged, setIsLogged] = useState(undefined);
+
+	useEffect(() => {
+		setIsLogged(sessionStorage.getItem("isLogged") || false);
+	}, [isLogged]);
+
 	return (
 		<Nav>
 			<Link href="/index"> Home </Link>

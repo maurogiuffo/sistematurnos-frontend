@@ -8,7 +8,6 @@ import { Form } from "../components/ui/Form";
 import useValidation from "../hooks/useValidation";
 import validateLogin from "../validation/validateLogin";
 
-import Router from "next/router";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
@@ -52,8 +51,7 @@ const Login = () => {
 			};
 
 			userLogin();
-			Router.push('/');
-
+			
 		} catch (error) {
 			console.log(error);
 		}
@@ -74,7 +72,7 @@ const Login = () => {
 					Login
 				</h1>
 
-				<Form onSubmit={login} novalidate>
+				<Form onSubmit={handleSubmit} novalidate>
 					<TextField
 						id="email"
 						name="email"

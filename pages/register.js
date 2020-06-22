@@ -89,8 +89,6 @@ const Register = () => {
 				const res = await axios.post(url, json);
 			};
 			addProfessionals();
-			Router.push('/login');
-
 		} catch (error) {
 			console.log(error);
 		}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import Router from "next/router";
 // Tiene 3 param: estado inicial, que campo vamos a validar y el 3er parametro la funcion que se va ejecutar (login, register...)
 const useValidation = (initialState, toValidate, fn ) => {
     
@@ -18,11 +18,18 @@ const useValidation = (initialState, toValidate, fn ) => {
             // verificamos el contenido de errors
             const noErrors = Object.keys(errors).length === 0;
 
-            if(noErrors) {
-                fn(); // Fn = Función que se ejecuta en el componente
+            if(noErrors) {  
+                fn(); // Fn = Función que se ejecuta en el componente   
+                
+                if(fn.name === "login"){
+                    Router.push('/');
+                }else if(fn.name === "register"){
+                    Router.push("/login");
+                }
             }
             // reiniciamos el formulario
             setSubmitForm(false);
+
         }
     }, [errors]);
 

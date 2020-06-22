@@ -6,6 +6,8 @@ import CategoriesProvider from "../context/categoriesContext";
 const MyApp = (props) => {
 	const { Component, pageProps } = props;
 
+	
+
 	return (
 		<CategoriesProvider>
 			<UsersProvider>
