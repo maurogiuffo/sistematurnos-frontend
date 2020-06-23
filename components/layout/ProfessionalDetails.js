@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import styled from "@emotion/styled";
 import Link from "next/link";
 
@@ -27,21 +27,41 @@ const Name = styled.a`
 	}
 `;
 
-const ProfessionalDetails = ({ professional }) => {
+const ProfessionalDetails = ({ professional}) => {
 
+
+	const [isLogged, setIsLogged] = useState(undefined);
+	
 	const { id, firstName, lastName, email } = professional;
-	console.log(professional);
+	
+	useEffect(() => {
+		setIsLogged(sessionStorage.getItem("isLogged"))	
+	}, [isLogged])
+
+	console.log(`IsLogged en Details ${isLogged}`);
 
 	return (
 		<Content>
 			<Description>
-				<Link href="/professionals/[id]" as={`/professionals/${id}`}>
-					<Name>
-						{firstName} {lastName}
-					</Name>
-				</Link>
+				{isLogged === "true" ? (
+					<Link
+						href="/professionals/[id]"
+						as={`/professionals/${id}`}
+					>
+						<Name>
+							{firstName} {lastName}
+						</Name>
+					</Link>
+				) : (
+					<Link href="/login">
+						<Name>
+							{firstName} {lastName}
+						</Name>
+					</Link>
+				)}
+
 				<div>
-					<p>{email}</p>	
+					<p>{email}</p>
 				</div>
 				<div>
 					<p></p>

@@ -38,6 +38,22 @@ const Professional = () => {
 			<h1> Desde Ficha de Profesional </h1>
 			<ProfessionalDetails professional={professional} />
 			<h2> Aca se mostraria la agenda con disponibilidad de turnos </h2>
+			<div className="professionals-list">
+				<div className="container">
+					<ul className="bg-white">
+						<h1> Probando Listado </h1>
+						{turns
+							? professionals.map((professional) => (
+									// Cuando mapeamos nos pide una key que va a ser un identificador único
+									<ProfessionalDetails
+										key={professional.id}
+										professional={professional}
+									/>
+							  ))
+							: null}
+					</ul>
+				</div>
+			</div>
 		</>
 	);
 };

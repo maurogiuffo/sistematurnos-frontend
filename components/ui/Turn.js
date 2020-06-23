@@ -31,7 +31,7 @@ export default function SimpleCard() {
     <Card className={classes.root}>
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
-          Word of the Day
+          Solicitud de Turno
         </Typography>
         <Typography variant="h5" component="h2">
           be{bull}nev{bull}o{bull}lent
