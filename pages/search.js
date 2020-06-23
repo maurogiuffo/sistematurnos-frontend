@@ -4,9 +4,9 @@ import ProfessionalDetails from "../components/layout/ProfessionalDetails";
 import { useRouter } from "next/router";
 import axios from 'axios';
 
-const Search = () => {
+const Search = (props) => {
 	const router = useRouter();
-
+	const [state, setState] = useState(props);
 
 
 	const {
@@ -24,6 +24,11 @@ const Search = () => {
 	}
 
 	useEffect(() => {
+
+		setState({
+			firstName: sessionStorage.getItem("firstName"),
+			isLogged: sessionStorage.getItem("isLogged")
+		})
 			getData().then(res => {
 				console.log(res);
 				setData(res.data);
@@ -32,7 +37,7 @@ const Search = () => {
 
 	return (
 		<div>
-			<Layout>
+			<Layout {...state}>
 				<div className="professionals-list">
 					<div className="container">
 						<ul className="bg-white">
