@@ -29,7 +29,7 @@ const Name = styled.a`
 
 const ProfessionalDetails = ({ professional }) => {
 
-	const { id, firstName, lastName, email } = professional;
+	const { id, firstName, lastName, email ,professional_turns} = professional;
 
 	return (
 		<Content>
@@ -45,13 +45,39 @@ const ProfessionalDetails = ({ professional }) => {
 				<div>
 					<p>
 
-
-
+					{professional_turns
+								? 
+							
+								professional_turns.map( (turn) => (
+									
+									<TurnDetails
+											key={turn.id}
+											turn={turn}
+										/>
+									 ))
+								: null}
 					</p>
 				</div>
 			</Description>
 		</Content>
 	);
 };
+
+
+const TurnDetails = ({ turn }) => {
+
+	const { id, turnDate} = turn;
+
+	return (
+		<Content>
+			<Description>
+			
+						{turnDate} 
+
+			</Description>
+		</Content>
+	);
+};
+
 
 export default ProfessionalDetails;
