@@ -35,21 +35,28 @@ const Logo = styled.p`
 `;
 
 // Este Header se pegará en el Layout
-const Header = () => {
-	// Este usuario va a venir de la Api
-	const [user, setUser] = useState(undefined);
-	const [isLogged, setIsLogged] = useState(undefined);
+const Header = props => {
 
+	const [state, setState] = useState(props);
+
+	
 	const logout = (e) => {	
-		setIsLogged(false);
+		sessionStorage.setItem("isLogged", false);
+		sessionStorage.setItem("firstName", '');
+		setState({
+			firstName: '',
+			isLogged: 'false'
+		  })
 	}
 
 	useEffect(() => {
-	
-		setIsLogged(sessionStorage.getItem("isLogged") || false);
-		setUser(sessionStorage.getItem("user") || {});
-		sessionStorage.setItem("isLogged", isLogged);
-	}, []);
+		setState(props);
+
+		/*setState({
+			firstName: sessionStorage.getItem("firstName"),
+			isLogged: sessionStorage.getItem("isLogged")
+		})*/
+	}, [props]);
 	
 
 	return (
@@ -67,7 +74,7 @@ const Header = () => {
 
 					<Search />
 
-					<Navigation />
+					<Navigation {...state} />
 				</div>
 
 				<div
@@ -76,17 +83,19 @@ const Header = () => {
 						align-items: center;
 					`}
 				>
-					{isLogged ? (
+
+					{state.isLogged =='true' ? (
 						<>
 							<p
 								css={css`
 									margin-right: 2rem;
 								`}
 							>
-								Hola:{user.firstName}
+								Hola {state.firstName}
 							</p>
-
-							<Button bgColor="true"  onClick={logout} >Logout</Button>
+						
+							<Button bgColor="true" onClick={logout} >Logout</Button>
+						
 						</>
 					) : (
 						<>

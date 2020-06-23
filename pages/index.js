@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+//import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Layout from "../components/layout/Layout";
 //import styled from "@emotion/styled";
 
@@ -13,9 +14,19 @@ import { UsersContext } from "../context/usersContext";
 // porlo tanto no ponemos 'return'
 const Home = () => {
 	const { professionals } = useContext(UsersContext);
+	const [state, setState] = useState(undefined);
+
+	useEffect(() => {
+		//setState(props);
+
+		setState({
+			firstName: sessionStorage.getItem("firstName"),
+			isLogged: sessionStorage.getItem("isLogged")
+		})
+	}, []);
 
 	return (
-		<Layout>
+		<Layout {...state}>
 			{/* Todo lo que se ponga aca será el contenido dinamico querecibira como 
       props el Layout */}
 			<div className="professionals-list">

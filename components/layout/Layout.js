@@ -1,8 +1,8 @@
-import React from "react";
+//import React from "react";
 import Header from "./Header";
 import { Global, css } from "@emotion/core";
 import Head from "next/head";
-
+import React, { createContext, useState, useEffect } from "react";
 
 // Este va a ser el componente principal
 //Todo lo que este fuera del <main> es el contenido que se
@@ -10,6 +10,16 @@ import Head from "next/head";
 
 const Layout = (props) => {
 
+	const [state, setState] = useState(props);
+
+	useEffect(() => {
+		setState(props);
+
+		//setState({
+		//	firstName: sessionStorage.getItem("firstName"),
+		//	isLogged: sessionStorage.getItem("isLogged")
+		///})
+	}, [props]);
 
 	return (
 		<>
@@ -92,7 +102,7 @@ const Layout = (props) => {
 				<link href="/static/css/app.css" rel="stylesheet" />
 			</Head>
 
-			<Header />
+			<Header {...state}/>
 
 			<main>{props.children}</main>
 		</>
