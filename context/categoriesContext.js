@@ -14,10 +14,8 @@ const CategoriesProvider = (props) => {
     useEffect(() => {
         const getCategories = async () => {
             const url = 'http://localhost:8080/category/'
-
-
             const categories = await axios.get(url);
-            console.log(categories.data);
+           
             setCategories(categories.data);
         }
         getCategories();

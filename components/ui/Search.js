@@ -40,7 +40,7 @@ const Search = () => {
 	const getProfessionals = (e) => {
 		e.preventDefault();
 		
-		if (search.trim() === "")  return ;
+		if (search == "")  return ;
 		// setSearch({
 		// 	...search,
 		// 	[e.target.name]: e.target.value,

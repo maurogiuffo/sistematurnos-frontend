@@ -2,27 +2,33 @@ import React, { useContext, useEffect, useState } from "react";
 import Layout from "../components/layout/Layout";
 import ProfessionalDetails from "../components/layout/ProfessionalDetails";
 import { useRouter } from "next/router";
-import { CategoriesContext } from "../context/categoriesContext";
+import axios from 'axios';
 
 const Search = () => {
 	const router = useRouter();
-	// extraemos lo que se manda por query
-	const [professionals, setProfessionals] = useState([]);
+
+
 
 	const {
 		query: { q },
 	} = router;
-	console.log(q);
-	const { categories } = useContext(CategoriesContext);
-	console.log(categories);
+
+	const [ professionalsTurns, setData ] = useState([]);
+
+	function getData()  {
+		const url = 'http://localhost:8080/user/category?categoryName='+q;
+
+		console.log(url);
+		const res = axios.get(url);
+		return res;
+	}
 
 	useEffect(() => {
-		const getProfessionals =  categories.filter((category) =>
-			category.categoryName.includes(q)
-		);
-		console.log(getProfessionals);
-		setProfessionals(getProfessionals[0].users);
-	}, [q,categories]);
+			getData().then(res => {
+				console.log(res);
+				setData(res.data);
+			});
+	}, [q]);
 
 	return (
 		<div>
@@ -32,14 +38,16 @@ const Search = () => {
 						<ul className="bg-white">
 							<h1> Probando Listado </h1>
 
-							{professionals
-								? professionals.map((professional) => (
-										// Cuando mapeamos nos pide una key que va a ser un identificador único
-										<ProfessionalDetails
+							{professionalsTurns
+								? 
+							
+								professionalsTurns.map( (professional) => (
+									
+									<ProfessionalDetails
 											key={professional.id}
 											professional={professional}
 										/>
-								  ))
+									 ))
 								: null}
 						</ul>
 					</div>
@@ -48,5 +56,6 @@ const Search = () => {
 		</div>
 	);
 };
+
 
 export default Search;
