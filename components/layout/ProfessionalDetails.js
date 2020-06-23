@@ -47,9 +47,7 @@ const ProfessionalDetails = ({ professional }) => {
 
 					{professional_turns
 								? 
-							
 								professional_turns.map( (turn) => (
-									
 									<TurnDetails
 											key={turn.id}
 											turn={turn}
@@ -69,13 +67,7 @@ const TurnDetails = ({ turn }) => {
 	const { id, turnDate} = turn;
 
 	return (
-		<Content>
-			<Description>
-			
-						{turnDate} 
-
-			</Description>
-		</Content>
+			<p>{'Fecha: ' + turnDate.substr(0,10) +'  Hora: '+ turnDate.substr(11,5)}</p>
 	);
 };
 
