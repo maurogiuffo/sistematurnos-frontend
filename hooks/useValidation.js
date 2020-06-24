@@ -23,7 +23,7 @@ const useValidation = (initialState, toValidate, fn ) => {
                 
                 if(fn.name === "login"){
                     Router.push('/');
-                }else if(fn.name === "register"){
+                }else if(fn.name === "createAccount"){
                     Router.push("/login");
                 }
             }

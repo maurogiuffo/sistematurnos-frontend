@@ -17,6 +17,18 @@ import axios from "axios";
 
 const Profile = () => {
 
+	const [state, setState] = useState(undefined);
+
+	useEffect(() => {
+		//setState(props);
+
+		setState({
+			firstName: sessionStorage.getItem("firstName"),
+			isLogged: sessionStorage.getItem("isLogged")
+		})
+	}, []);
+
+
 	const INITIAL_STATE = {
 		fechaDesde: "2020-01-20",
 		horaDesde: "10",
@@ -77,7 +89,7 @@ const Profile = () => {
 	return (
 
 <div>
-			<Layout>
+			<Layout  {...state}>
 			<h2> Crear Turnos </h2>
 				{/* Todo lo que se ponga aca será el contenido dinamico querecibira como 
       props el Layout */}

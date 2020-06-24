@@ -5,7 +5,7 @@ import { css } from "@emotion/core";
 import Search from "../ui/Search";
 import Navigation from "./Navigation";
 import Button from "../ui/Button";
-import { Router } from "next/router";
+import  Router  from "next/router";
 
 const HeaderContainer = styled.header`
 	/* Aca estamos usando un color que establecimos de manera global en el Layout */
@@ -41,16 +41,24 @@ const Header = props => {
 
 	
 	const logout = (e) => {	
-		sessionStorage.setItem("isLogged", false);
-		sessionStorage.setItem("firstName", '');
+		//sessionStorage.setItem("isLogged", false);
+		//sessionStorage.setItem("firstName", '');
+
+		
 		setState({
 			firstName: '',
 			isLogged: 'false'
 		  })
+
+		  
+		sessionStorage.clear();
+		Router.push("/");
+
 	}
 
 	useEffect(() => {
 		setState(props);
+
 
 		/*setState({
 			firstName: sessionStorage.getItem("firstName"),
