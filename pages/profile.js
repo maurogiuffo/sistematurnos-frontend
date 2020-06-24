@@ -19,27 +19,26 @@ const Profile = () => {
 
 	const INITIAL_STATE = {
 		fechaDesde: "2020-01-20",
-		horaDesde: "",
-		cantidadDias: "",
-		cantidadTurnos: "",
-		duracionTurno: 0
-
+		horaDesde: "10",
+		cantidadDias: "1",
+		cantidadTurnos: "5",
+		duracionTurno: "15"
 	};
 	
 	function handleSubmit(){
-		createAccount();
+		createTurns();
 	}
 
 	const [ values, setValues ] = useState(INITIAL_STATE);
 
 	const { fechaDesde, horaDesde, cantidadDias, cantidadTurnos, duracionTurno } = values;
 	
-	async function createAccount() {
+	function createTurns() {
 
 		const id =sessionStorage.getItem("userId");
 
 		try {
-			const addProfessionals = async () => {
+			 
 				const url = "http://localhost:8080/turn/createLote/";
 	
 				const  json={
@@ -51,11 +50,9 @@ const Profile = () => {
 					duracionTurno: duracionTurno
 				};
 
-				const res = await axios.post(url, json);
-			};
-			addProfessionals().then(res => {
-				console.log(res);
-			});
+				const res = axios.post(url, json);
+			
+
 		} catch (error) {
 			console.log('error ' + error);
 		}
