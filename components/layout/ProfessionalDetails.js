@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import Link from "next/link";
+import Button from "@material-ui/core/Button";
 
 const Content = styled.li`
 	padding: 4rem;
@@ -44,7 +45,13 @@ const ProfessionalDetails = ({ professional }) => {
 				</div>
 				<div>
 					<p>
-
+						<table>
+						<th>
+							<td >Fecha</td>
+							<td>Hora</td>
+							<td>Asignado</td>
+						</th>	
+						<tr>
 					{professional_turns
 								? 
 								professional_turns.map( (turn) => (
@@ -54,6 +61,9 @@ const ProfessionalDetails = ({ professional }) => {
 										/>
 									 ))
 								: null}
+					</tr>
+					</table>
+
 					</p>
 				</div>
 			</Description>
@@ -67,7 +77,17 @@ const TurnDetails = ({ turn }) => {
 	const { id, turnDate} = turn;
 
 	return (
-			<p>{'Fecha: ' + turnDate.substr(0,10) +'  Hora: '+ turnDate.substr(11,5)}</p>
+			
+			<div>
+				<td>
+					{turnDate.substr(0,10) }
+				</td>		
+				<td>
+					{turnDate.substr(11,5)}
+				</td>
+				<td><Button variant="contained" type="submit">Solicitar	</Button>
+				</td>
+			</div>
 	);
 };
 
