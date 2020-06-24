@@ -40,16 +40,17 @@ const Profile = () => {
 		try {
 			 
 				const url = "http://localhost:8080/turn/createLote/";
-	
+
 				const  json={
 					userId: id,
-					fechaDesde: fechaDesde,
-					horaDesde: horaDesde,
+					fechaDesde: fechaDesde+ 'T'+horaDesde,
+					horaDesde: 1,
 					cantidadDias: cantidadDias,
 					cantidadTurnos: cantidadTurnos,
 					duracionTurno: duracionTurno
 				};
-
+				
+		
 				const res = axios.post(url, json);
 			
 
@@ -102,6 +103,18 @@ const Profile = () => {
 						}}
 						onChange={handleChange}
 						/>
+						<TextField
+						id="horaDesde"
+						name="horaDesde"
+						label="Hora Inicial"
+						placeholder="Hora Inicial"
+						type="time"
+						onChange={handleChange}
+						onBlur={handleBlur}
+					/>
+										{/* {errors.lastname ? <Error>{errors.lastname}</Error> : null} */}
+
+
 					<TextField
 						id="cantidadDias"
 						name="cantidadDias"
@@ -114,17 +127,7 @@ const Profile = () => {
 						{/* {errors.dni ? <Error>{errors.dni}</Error> : null} */}
 
 					{/* {errors.name ? <Error>{errors.name}</Error> : null} */}
-					<TextField
-						id="horaDesde"
-						name="horaDesde"
-						label="Hora Inicial"
-						placeholder="Hora Inicial"
-						type="number"
-						onChange={handleChange}
-						onBlur={handleBlur}
-					/>
-										{/* {errors.lastname ? <Error>{errors.lastname}</Error> : null} */}
-
+					
 			
 					<TextField
 						id="duracionTurno"
