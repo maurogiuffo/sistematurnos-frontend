@@ -41,7 +41,7 @@ const Search = (props) => {
 				<div className="professionals-list">
 					<div className="container">
 						<ul className="bg-white">
-							<h1> Probando Listado </h1>
+							<h1> Listado de turnos por profesional </h1>
 
 							{professionalsTurns
 								? 
