@@ -48,6 +48,7 @@ const Login = props => {
 			userLogin().then(res => {
 				sessionStorage.setItem("authorization", res.data.token);
 				//sessionStorage.setItem("user", JSON.stringify(res.data.user));
+				sessionStorage.setItem("userId", res.data.user.id);
 				sessionStorage.setItem("firstName", res.data.user.firstName);
 				sessionStorage.setItem("lastName", res.data.user.lastName);
 				sessionStorage.setItem("email", res.data.user.email);
