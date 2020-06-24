@@ -53,43 +53,35 @@ const Profile = () => {
 		handleDateChange,
 		handleTimeChange,
 		selectedDate,
-		selectedTime
+		selectedTime,
 	} = useValidation(INITIAL_STATE, validateTurnsLote, createLote);
 
 	// Extraemos los values
 
 	const { daysQuantity, turnsQuantity, duration, client } = values;
 
-	useEffect(() => {
-		const getTurnsLote = async () => {
-			const url = "http://localhost:8080/turn/createLote";
-
-			let json = {
-				fechaDesde: selectedDate,
-				horaDesde: selectedTime,
-				cantDias: daysQuantity,
-				cantTurnos: turnsQuantity,
-				duracionTurno: duration,
-				cliente: client,
-			};
-
-			const lote = await axios.post(url, json);
-		};
-		getTurnsLote();
-	}, []);
-
 	async function createLote() {
 		try {
-			const addTurnsLote = async () => {
+			const getTurnsLote = async () => {
 				const url = "http://localhost:8080/turn/createLote";
 
-				const res = await axios.post(url, json);
+				let json = {
+					fechaDesde: selectedDate,
+					horaDesde: selectedTime,
+					cantDias: daysQuantity,
+					cantTurnos: turnsQuantity,
+					duracionTurno: duration,
+					cliente: client,
+				};
+
+				const lote = await axios.post(url, json);
 			};
-			addProfessionals();
+			getTurnsLote();
 		} catch (error) {
 			console.log(error);
 		}
 	}
+
 	return (
 		<div>
 			<Layout>
