@@ -14,18 +14,7 @@ const UsersProvider = (props) => {
 	// Una vez que se cargue este context en el que estamos se va a ejecutar el useEffect
 	// Y ahi se hace el llamado a la API
 
-	useEffect(() => {
-		const getTurnsLote = async () => {
-			const url = 'http://localhost:8080/turn/createLote';
-	
-			const lote = await axios.get(url);
-			console.log(lote);
-			setTurns(lote.data);
-		}
-		getTurnsLote();
-		
-		
-	}, [])
+
 
 
 	useEffect(() => {

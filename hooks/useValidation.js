@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Router from "next/router";
+import moment from "moment";
 // Tiene 3 param: estado inicial, que campo vamos a validar y el 3er parametro la funcion que se va ejecutar (login, register...)
 const useValidation = (initialState, toValidate, fn ) => {
     
@@ -10,6 +11,9 @@ const useValidation = (initialState, toValidate, fn ) => {
     // cuando se haga submit el estado cambiara a true y usamos un useEffect para ejecutar el codigo
     const [ submitForm, setSubmitForm ] = useState(false);
 
+    const [selectedDate, setSelectedDate] = useState(moment());
+
+    const [selectedTime, setSelectedTime] = useState(moment());
     // cuando importemos desde pages register, login... al hacer submit
     // submitForm cambiará su estado a true y se ejecutaran las validaciones
 
@@ -59,13 +63,25 @@ const useValidation = (initialState, toValidate, fn ) => {
         setErrors(validationErrors);
     }
 
+    const handleDateChange = (date) => {
+      setSelectedDate(date);
+    };
+
+    const handleTimeChange = (date) => {
+        setSelectedTime(date);
+      };
+
     return {
         // retorno todo el state y las funciones
         values,
         errors,
         handleSubmit,
         handleChange,
-        handleBlur
+        handleBlur,
+        handleDateChange,
+        handleTimeChange,
+        selectedDate,
+        selectedTime
     }
 }
 
