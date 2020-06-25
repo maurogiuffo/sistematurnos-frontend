@@ -37,8 +37,8 @@ const Navigation = props => {
 
 			{ state.isLogged == 'true' ? (
 				<>
-					<Link href="/schedule"> Agenda </Link>
-					<Link href="/profile"> Mi Perfil </Link>
+					<Link href="/schedule"> Mi Perfil </Link>
+					<Link href="/profile"> Turnos </Link>
 				</>
 			) : null}
 		</Nav>

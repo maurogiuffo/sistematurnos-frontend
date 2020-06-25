@@ -64,7 +64,7 @@ const Profile = () => {
 				
 		
 				const res = axios.post(url, json);
-			
+			alert('Turnos Creados correctmente!');
 
 		} catch (error) {
 			console.log('error ' + error);
