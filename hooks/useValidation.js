@@ -25,6 +25,8 @@ const useValidation = (initialState, toValidate, fn ) => {
                     Router.push('/');
                 }else if(fn.name === "createAccount"){
                     Router.push("/login");
+                }else if(fn.name === "createLote"){
+                    Router.push("/schedule");
                 }
             }
             // reiniciamos el formulario

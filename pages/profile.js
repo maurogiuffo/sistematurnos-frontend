@@ -1,174 +1,146 @@
-import React , { useContext, useState, useEffect }from "react";
-import Layout from "../components/layout/Layout";
-
+import React from "react";
 import { css } from "@emotion/core";
-import { Form, Field, InputSubmit, Error } from "../components/ui/Form";
-
-import TextField from "@material-ui/core/TextField";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import Radio from "@material-ui/core/Radio";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import Button from "@material-ui/core/Button";
 import axios from "axios";
+import Layout from "../components/layout/Layout";
+// En estos componentes tenemos los estilos
+import { Form, Field, InputSubmit, Error } from "../components/ui/Form";
+// Para las validaciones de formulario hacemos un hook que viene a ser una especie de funcion
+// que vamos a reutilizar para todos los formularios que tengamos
+import useValidation from "../hooks/useValidation";
+import validateTurnsLote from "../validation/validateTurnsLote";
 
+import styled from "@emotion/styled";
+import Router from "next/router";
+import TextField from "@material-ui/core/TextField";
+
+import Button from "@material-ui/core/Button";
+import { Formik } from "formik";
+
+
+// hacer validaciones
 const Profile = () => {
-
-	const [state, setState] = useState(undefined);
-
-	useEffect(() => {
-		//setState(props);
-
-		setState({
-			firstName: sessionStorage.getItem("firstName"),
-			isLogged: sessionStorage.getItem("isLogged")
-		})
-	}, []);
-
-
 	const INITIAL_STATE = {
-		fechaDesde: "2020-01-20",
-		horaDesde: "10",
-		cantidadDias: "1",
-		cantidadTurnos: "5",
-		duracionTurno: "15"
-	};
-	
-	function handleSubmit(){
-		createTurns();
-	}
-
-	const [ values, setValues ] = useState(INITIAL_STATE);
-
-	const { fechaDesde, horaDesde, cantidadDias, cantidadTurnos, duracionTurno } = values;
-	
-	function createTurns() {
-
-		const id =sessionStorage.getItem("userId");
-
-		try {
-			 
-				const url = "http://localhost:8080/turn/createLote/";
-
-				const  json={
-					userId: id,
-					fechaDesde: fechaDesde+ 'T'+horaDesde,
-					horaDesde: 1,
-					cantidadDias: cantidadDias,
-					cantidadTurnos: cantidadTurnos,
-					duracionTurno: duracionTurno
-				};
-				
 		
-				const res = axios.post(url, json);
-			alert('Turnos Creados correctmente!');
+		selectedDate: "25/6/2020",
+		selectedTime: "20:00",
+		daysQuantity: "0",
+		turnsQuantity: "0",
+		duration: "15",
+		//client: null,
+	};
 
+	const {
+		values,
+		errors,
+		handleSubmit,
+		handleChange,
+		handleBlur,
+		
+	} = useValidation(INITIAL_STATE, validateTurnsLote, createLote);
+
+	// Extraemos los values
+
+	const { selectedDate, selectedTime, daysQuantity, turnsQuantity, duration,  } = values;
+
+	async function createLote() {
+		try {
+			const id = sessionStorage.getItem("userId");
+			console.log(
+				`${id} -- ${selectedDate} -- ${selectedTime} -- ${daysQuantity} -- ${turnsQuantity} -- ${duration}`
+			);
+			const getTurnsLote = async () => {
+				const url = "http://localhost:8080/turn/createLote";
+
+				let json = {
+					userId: id,
+					fechaDesde: selectedDate + "T" + selectedTime,
+					cantDias: daysQuantity,
+					cantTurnos: turnsQuantity,
+					duracionTurno: duration,
+					//cliente: client,
+				};
+
+				const lote = await axios.post(url, json);
+			};
+			getTurnsLote();
 		} catch (error) {
-			console.log('error ' + error);
+			console.log(error);
 		}
 	}
-	
-	
-	const handleChange = e => {
-		e.preventDefault();
-		 setValues({
-			 ...values,
-			[e.target.name] : e.target.value
-		 })
-	 }
-	
-
-	function handleBlur(){
-		
-	}
-	
 
 	return (
-
-<div>
-			<Layout  {...state}>
-			<h2> Crear Turnos </h2>
-				{/* Todo lo que se ponga aca será el contenido dinamico querecibira como 
-      props el Layout */}
+		<div>
+			<Layout>
 				<h1
 					css={css`
 						text-align: center;
 						margin-top: 5rem;
 					`}
 				>
-					Agregar Turnos
+					Crear Lote de Turnos
 				</h1>
 
 				<Form onSubmit={handleSubmit} novalidate>
-				<TextField
-						id="fechaDesde"
-						name="fechaDesde"
+					<TextField
+						id="selectedDate"
+						name="selectedDate"
 						label="Fecha"
 						type="date"
-						defaultValue="2020-01-20"
-						
 						InputLabelProps={{
-						shrink: true,
+							shrink: true,
 						}}
 						onChange={handleChange}
-						/>
-						<TextField
-						id="horaDesde"
-						name="horaDesde"
+						onBlur={handleBlur}
+					/>
+
+					<TextField
+						id="selectedTime"
+						name="selectedTime"
 						label="Hora Inicial"
 						placeholder="Hora Inicial"
 						type="time"
 						onChange={handleChange}
 						onBlur={handleBlur}
 					/>
-										{/* {errors.lastname ? <Error>{errors.lastname}</Error> : null} */}
-
+					{/* {errors.lastname ? <Error>{errors.lastname}</Error> : null} */}
 
 					<TextField
-						id="cantidadDias"
-						name="cantidadDias"
-						label="cantidadDias"
-						placeholder="cantidadDias"
+						id="daysQuantity"
+						name="daysQuantity"
+						label="Cantidad Dias"
+						placeholder="Días que quiere fijar turnos"
 						type="number"
 						onChange={handleChange}
 						onBlur={handleBlur}
 					/>
-						{/* {errors.dni ? <Error>{errors.dni}</Error> : null} */}
-
-					{/* {errors.name ? <Error>{errors.name}</Error> : null} */}
-					
-			
-					<TextField
-						id="duracionTurno"
-						name="duracionTurno"
-						label="duracionTurno"
-						placeholder="duracionTurno"
-						type="number"						
-						onChange={handleChange}
-						onBlur={handleBlur}
-					/>
-						{/* {errors.email ? <Error>{errors.email}</Error> : null} */}
+					{/* {errors.dni ? <Error>{errors.dni}</Error> : null} */}
 
 					<TextField
-						id="cantidadTurnos"
-						name="cantidadTurnos"
-						label="cantidadTurnos"
-						placeholder="cantidadTurnos"
+						id="turnsQuantity"
+						name="turnsQuantity"
+						label="Cantidad de Turnos"
+						placeholder="Turnos a fijar por día"
 						type="number"
 						onChange={handleChange}
 						onBlur={handleBlur}
 					/>
-											{/* {errors.password ? <Error>{errors.password}</Error> : null} */}
+					{/* {errors.email ? <Error>{errors.email}</Error> : null} */}
 
+					<TextField
+						id="duration"
+						name="duration"
+						label="Duracion "
+						placeholder="Duración de cada Turno"
+						type="number"
+						onChange={handleChange}
+						onBlur={handleBlur}
+					/>
+					{/* {errors.password ? <Error>{errors.password}</Error> : null} */}
 
 					<Button variant="contained" type="submit">
-						Guardar
+						Crear Lote
 					</Button>
 				</Form>
-				
 			</Layout>
 		</div>
 	);
