@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { css } from "@emotion/core";
 import axios from "axios";
 import Layout from "../components/layout/Layout";
@@ -19,6 +19,17 @@ import { Formik } from "formik";
 
 // hacer validaciones
 const Profile = () => {
+	
+	const [state, setState] = useState({name:'',isLogged:''});
+
+	useEffect(() => {
+		setState({
+			name: sessionStorage.getItem("firstName"),
+			isLogged: sessionStorage.getItem("isLogged")
+		})
+	}, []);
+
+
 	const INITIAL_STATE = {
 		
 		selectedDate: "25/6/2020",
@@ -70,7 +81,9 @@ const Profile = () => {
 
 	return (
 		<div>
-			<Layout>
+			<Layout {...state}>
+			{state.isLogged  == 'true'? (
+				<>
 				<h1
 					css={css`
 						text-align: center;
@@ -141,6 +154,7 @@ const Profile = () => {
 						Crear Lote
 					</Button>
 				</Form>
+				</>):null}
 			</Layout>
 		</div>
 	);

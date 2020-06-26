@@ -50,7 +50,7 @@ const Search = (props) => {
 							
 								professionalsTurns.map( (professional) => (
 									
-									<ProfessionalDetails 
+									<ProfessionalDetails state={state}
 											key={professional.id}
 											professional={professional}
 										/>

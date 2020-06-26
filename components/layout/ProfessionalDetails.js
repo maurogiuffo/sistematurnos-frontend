@@ -28,16 +28,14 @@ const Name = styled.a`
 	}
 `;
 
-const ProfessionalDetails = ({ professional,isLogged }) => {
+const ProfessionalDetails = ({ professional,state}) => {
 
-	
-	//const [isLogged, setIsLogged] = useState(undefined);
 		
 	const { id, firstName, lastName, email ,professional_turns} = professional;
 
 	useEffect(() => {
-		//setIsLogged(sessionStorage.getItem("isLogged"))	
-	}, [isLogged])
+		
+	}, [])
 
 
 	return (
@@ -62,8 +60,8 @@ const ProfessionalDetails = ({ professional,isLogged }) => {
 						<tr>
 					{professional_turns
 								? 
-								professional_turns.map( (turn,isLogged) => (
-									<TurnDetails
+								professional_turns.map( (turn) => (
+									<TurnDetails state={state}
 											key={turn.id}
 											turn={turn}
 										/>
@@ -80,7 +78,7 @@ const ProfessionalDetails = ({ professional,isLogged }) => {
 };
 
 
-const TurnDetails = ({ turn, isLogged}) => {
+const TurnDetails = ({ turn, state}) => {
 
 	const { id, turnDate} = turn;
 
@@ -93,7 +91,7 @@ const TurnDetails = ({ turn, isLogged}) => {
 				<td>
 					{turnDate.substr(11,5)}
 				</td>
-				{isLogged === "true" ? (
+				{state.isLogged === "true" ? (
 					<td><Button variant="contained" type="submit">
 						Solicitar	</Button>
 				</td>
