@@ -9,17 +9,15 @@ import React, { createContext, useState, useEffect } from "react";
 // va a repetir en las distintas vistas, como por ej header nav y footer
 
 const Layout = (props) => {
+	const [state, setState] = useState(undefined);
 
-	//const [state, setState] = useState(props);
+	useEffect(() => {
+		setState({
+			name: sessionStorage.getItem("firstName"),
+			isLogged: sessionStorage.getItem("isLogged")
+		})
+	}, []);
 
-	//useEffect(() => {
-	//	setState(props);
-
-		//setState({
-		//	firstName: sessionStorage.getItem("firstName"),
-		//	isLogged: sessionStorage.getItem("isLogged")
-		///})
-	//}, [props]);
 
 	return (
 		<>
@@ -102,7 +100,7 @@ const Layout = (props) => {
 				<link href="/static/css/app.css" rel="stylesheet" />
 			</Head>
 
-			<Header />
+			<Header {...state}/>
 
 			<main>{props.children}</main>
 		</>

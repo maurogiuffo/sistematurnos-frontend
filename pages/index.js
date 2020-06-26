@@ -1,26 +1,16 @@
-//import React, { useContext } from "react";
 import React, { useContext, useState, useEffect } from "react";
 import Layout from "../components/layout/Layout";
-//import styled from "@emotion/styled";
 
-// Entonces en este index que es el que primero se va a cargar cuando
-// ejecutemos el servidor pegamos el Layout
 import ProfessionalDetails from "../components/layout/ProfessionalDetails";
 import { UsersContext } from "../context/usersContext";
 
-//import styled from "@emotion/styled";
-
-// Con las arrow functions si ponemos parentesis en lugar de llaves el retorno es implicito
-// porlo tanto no ponemos 'return'
 const Home = () => {
 	const { professionals } = useContext(UsersContext);
 	const [state, setState] = useState(undefined);
 
 	useEffect(() => {
-		//setState(props);
-
 		setState({
-			firstName: sessionStorage.getItem("firstName"),
+			name: sessionStorage.getItem("firstName"),
 			isLogged: sessionStorage.getItem("isLogged")
 		})
 	}, []);

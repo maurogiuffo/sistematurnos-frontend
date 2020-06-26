@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import Layout from "../components/layout/Layout";
 import axios from "axios";
 
@@ -8,12 +8,21 @@ import { Form } from "../components/ui/Form";
 import useValidation from "../hooks/useValidation";
 import validateLogin from "../validation/validateLogin";
 
-import Router from "next/router";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-const Login = ({isLogged, setIsLogged}) => {
+const Login = () => {
+	
+	const [state, setState] = useState({name:'',isLogged:''});
 
+	useEffect(() => {
+		setState({
+			name: sessionStorage.getItem("firstName"),
+			isLogged: sessionStorage.getItem("isLogged")
+		})
+	}, []);
+
+	
 	const INITIAL_STATE = {
 		email: "",
 		password: ""
@@ -52,11 +61,9 @@ const Login = ({isLogged, setIsLogged}) => {
 				sessionStorage.setItem("userType", res.data.user.userType);
 				sessionStorage.setItem("isLogged", true);
 
-				setIsLogged(true);
-
 				setState({
 					name: res.data.user.firstName,
-					isLogged : true,
+					isLogged : 'true',
 				})
 			});
 			
@@ -68,10 +75,13 @@ const Login = ({isLogged, setIsLogged}) => {
 		
 	
 	return (
-		<div>
-			<Layout >
+	
+			<Layout {...state}>
 				{/* Todo lo que se ponga aca será el contenido dinamico querecibira como 
       props el Layout */}
+
+	 		 {state.isLogged  !== 'true'? (
+				  <>
 				<h1
 					css={css`
 						text-align: center;
@@ -108,10 +118,14 @@ const Login = ({isLogged, setIsLogged}) => {
 					<Button variant="contained" type="submit">
 						Iniciar Sesión
 					</Button>
+
+
 				</Form>
+				</>
+				):null}
 				
-			</Layout>
-		</div>
+			</Layout >
+	
 	);
 };
 

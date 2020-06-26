@@ -17,22 +17,14 @@ const Nav = styled.nav`
 	}
 `;
 
-const Navigation = ({isLogged, setIsLogged}) => {
-	// Segun el usuario que este conectado se le va a  mostrar distintas vista
-	//const [isLogged, setIsLogged] = useState(props);
-	//console.log(isLogged, props);
-	
+const Navigation = (state) => {
 
-
-	useEffect(() => {
-		setIsLogged(sessionStorage.getItem("isLogged"));
-	}, [isLogged]);
 
 	return (
 		<Nav>
 			<Link href="/index"> Home </Link>
 
-			{isLogged === 'true' ? (
+			{state.isLogged === 'true' ? (
 				<>
 					<Link href="/schedule"> Agenda </Link>
 					<Link href="/profile"> Mi Perfil </Link>
