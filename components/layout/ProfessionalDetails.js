@@ -1,4 +1,4 @@
-import React from "react";
+import React , { createContext, useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import Link from "next/link";
 import Button from "@material-ui/core/Button";
@@ -28,9 +28,17 @@ const Name = styled.a`
 	}
 `;
 
-const ProfessionalDetails = ({ professional }) => {
+const ProfessionalDetails = ({ professional,isLogged }) => {
 
+	
+	//const [isLogged, setIsLogged] = useState(undefined);
+		
 	const { id, firstName, lastName, email ,professional_turns} = professional;
+
+	useEffect(() => {
+		//setIsLogged(sessionStorage.getItem("isLogged"))	
+	}, [isLogged])
+
 
 	return (
 		<Content>
@@ -54,7 +62,7 @@ const ProfessionalDetails = ({ professional }) => {
 						<tr>
 					{professional_turns
 								? 
-								professional_turns.map( (turn) => (
+								professional_turns.map( (turn,isLogged) => (
 									<TurnDetails
 											key={turn.id}
 											turn={turn}
@@ -72,7 +80,7 @@ const ProfessionalDetails = ({ professional }) => {
 };
 
 
-const TurnDetails = ({ turn }) => {
+const TurnDetails = ({ turn, isLogged}) => {
 
 	const { id, turnDate} = turn;
 
@@ -85,8 +93,11 @@ const TurnDetails = ({ turn }) => {
 				<td>
 					{turnDate.substr(11,5)}
 				</td>
-				<td><Button variant="contained" type="submit">Solicitar	</Button>
+				{isLogged === "true" ? (
+					<td><Button variant="contained" type="submit">
+						Solicitar	</Button>
 				</td>
+				) : null}
 			</div>
 	);
 };

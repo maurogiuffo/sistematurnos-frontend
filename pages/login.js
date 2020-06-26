@@ -12,9 +12,7 @@ import Router from "next/router";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-const Login = props => {
-
-	const [state, setState] = useState(props);
+const Login = ({isLogged, setIsLogged}) => {
 
 	const INITIAL_STATE = {
 		email: "",
@@ -47,7 +45,6 @@ const Login = props => {
 
 			userLogin().then(res => {
 				sessionStorage.setItem("authorization", res.data.token);
-				//sessionStorage.setItem("user", JSON.stringify(res.data.user));
 				sessionStorage.setItem("userId", res.data.user.id);
 				sessionStorage.setItem("firstName", res.data.user.firstName);
 				sessionStorage.setItem("lastName", res.data.user.lastName);
@@ -55,8 +52,10 @@ const Login = props => {
 				sessionStorage.setItem("userType", res.data.user.userType);
 				sessionStorage.setItem("isLogged", true);
 
+				setIsLogged(true);
+
 				setState({
-					firstName: res.data.user.firstName,
+					name: res.data.user.firstName,
 					isLogged : true,
 				})
 			});
@@ -70,7 +69,7 @@ const Login = props => {
 	
 	return (
 		<div>
-			<Layout {...state}>
+			<Layout >
 				{/* Todo lo que se ponga aca será el contenido dinamico querecibira como 
       props el Layout */}
 				<h1

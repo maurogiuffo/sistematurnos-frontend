@@ -10,16 +10,16 @@ import React, { createContext, useState, useEffect } from "react";
 
 const Layout = (props) => {
 
-	const [state, setState] = useState(props);
+	//const [state, setState] = useState(props);
 
-	useEffect(() => {
-		setState(props);
+	//useEffect(() => {
+	//	setState(props);
 
 		//setState({
 		//	firstName: sessionStorage.getItem("firstName"),
 		//	isLogged: sessionStorage.getItem("isLogged")
 		///})
-	}, [props]);
+	//}, [props]);
 
 	return (
 		<>
@@ -102,7 +102,7 @@ const Layout = (props) => {
 				<link href="/static/css/app.css" rel="stylesheet" />
 			</Head>
 
-			<Header {...state}/>
+			<Header />
 
 			<main>{props.children}</main>
 		</>

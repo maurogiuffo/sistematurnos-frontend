@@ -43,12 +43,14 @@ const Search = (props) => {
 						<ul className="bg-white">
 							<h1> Listado de turnos por profesional </h1>
 
+							
+
 							{professionalsTurns
 								? 
 							
 								professionalsTurns.map( (professional) => (
 									
-									<ProfessionalDetails
+									<ProfessionalDetails 
 											key={professional.id}
 											professional={professional}
 										/>

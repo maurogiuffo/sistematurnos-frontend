@@ -35,37 +35,16 @@ const Logo = styled.p`
 `;
 
 // Este Header se pegará en el Layout
-const Header = props => {
+const Header = () => {
 
-	const [state, setState] = useState(props);
-
+	const [isLogged, setIsLogged] = useState(undefined);
+	const [name, setName] = useState(undefined);
 	
 	const logout = (e) => {	
-		//sessionStorage.setItem("isLogged", false);
-		//sessionStorage.setItem("firstName", '');
-
-		
-		setState({
-			firstName: '',
-			isLogged: 'false'
-		  })
-
-		  
+		setIsLogged(false);
+		setName("");
 		sessionStorage.clear();
-		Router.push("/");
-
 	}
-
-	useEffect(() => {
-		setState(props);
-
-
-		/*setState({
-			firstName: sessionStorage.getItem("firstName"),
-			isLogged: sessionStorage.getItem("isLogged")
-		})*/
-	}, [props]);
-	
 
 	return (
 		<HeaderContainer>
@@ -82,7 +61,7 @@ const Header = props => {
 
 					<Search />
 
-					<Navigation {...state} />
+					<Navigation isLogged={isLogged} setIsLogged={setIsLogged} />
 				</div>
 
 				<div
@@ -92,14 +71,14 @@ const Header = props => {
 					`}
 				>
 
-					{state.isLogged =='true' ? (
+					{isLogged =='true' ? (
 						<>
 							<p
 								css={css`
 									margin-right: 2rem;
 								`}
 							>
-								Hola {state.firstName}
+								Hola {name}
 							</p>
 						
 							<Button bgColor="true" onClick={logout} >Logout</Button>
