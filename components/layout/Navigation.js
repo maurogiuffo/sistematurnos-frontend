@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
+import { AuthContext } from "../../context/authContext";
 
 const Nav = styled.nav`
 	padding-left: 2rem;
@@ -17,14 +18,15 @@ const Nav = styled.nav`
 	}
 `;
 
-const Navigation = (state) => {
-
-
+const Navigation = () => {
+	
+	const {isLogged} = useContext(AuthContext);
+	
 	return (
 		<Nav>
 			<Link href="/index"> Home </Link>
 
-			{state.isLogged === 'true' ? (
+			{isLogged === "true" ? (
 				<>
 					<Link href="/schedule"> Agenda </Link>
 					<Link href="/profile"> Mi Perfil </Link>

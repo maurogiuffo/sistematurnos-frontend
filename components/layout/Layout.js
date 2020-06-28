@@ -9,16 +9,7 @@ import React, { createContext, useState, useEffect } from "react";
 // va a repetir en las distintas vistas, como por ej header nav y footer
 
 const Layout = (props) => {
-	const [state, setState] = useState(undefined);
-
-	useEffect(() => {
-		setState({
-			name: sessionStorage.getItem("firstName"),
-			isLogged: sessionStorage.getItem("isLogged")
-		})
-	}, []);
-
-
+	
 	return (
 		<>
 			{/* Estilos que se van a aplicar en toda la App por eso globales */}
@@ -100,7 +91,7 @@ const Layout = (props) => {
 				<link href="/static/css/app.css" rel="stylesheet" />
 			</Head>
 
-			<Header {...state}/>
+			<Header />
 
 			<main>{props.children}</main>
 		</>

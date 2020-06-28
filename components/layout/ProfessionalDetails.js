@@ -1,7 +1,8 @@
-import React , { createContext, useState, useEffect } from "react";
+import React , { useContext , useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import Link from "next/link";
-import Button from "@material-ui/core/Button";
+import { AuthContext } from "../../context/authContext";
+import TurnDetails from "../layout/TurnDetails";
 
 const Content = styled.li`
 	padding: 4rem;
@@ -28,9 +29,9 @@ const Name = styled.a`
 	}
 `;
 
-const ProfessionalDetails = ({ professional,state}) => {
+const ProfessionalDetails = ({ professional}) => {
 
-		
+    const {isLogged} = useContext(AuthContext);	
 	const { id, firstName, lastName, email ,professional_turns} = professional;
 
 	useEffect(() => {
@@ -61,9 +62,10 @@ const ProfessionalDetails = ({ professional,state}) => {
 					{professional_turns
 								? 
 								professional_turns.map( (turn) => (
-									<TurnDetails state={state}
+									<TurnDetails 
 											key={turn.id}
 											turn={turn}
+											isLogged={isLogged}
 										/>
 									 ))
 								: null}
@@ -76,29 +78,5 @@ const ProfessionalDetails = ({ professional,state}) => {
 		</Content>
 	);
 };
-
-
-const TurnDetails = ({ turn, state}) => {
-
-	const { id, turnDate} = turn;
-
-	return (
-			
-			<div>
-				<td>
-					{turnDate.substr(0,10) }
-				</td>		
-				<td>
-					{turnDate.substr(11,5)}
-				</td>
-				{state.isLogged === "true" ? (
-					<td><Button variant="contained" type="submit">
-						Solicitar	</Button>
-				</td>
-				) : null}
-			</div>
-	);
-};
-
 
 export default ProfessionalDetails;

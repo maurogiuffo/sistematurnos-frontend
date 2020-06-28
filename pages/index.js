@@ -6,17 +6,9 @@ import { UsersContext } from "../context/usersContext";
 
 const Home = () => {
 	const { professionals } = useContext(UsersContext);
-	const [state, setState] = useState(undefined);
-
-	useEffect(() => {
-		setState({
-			name: sessionStorage.getItem("firstName"),
-			isLogged: sessionStorage.getItem("isLogged")
-		})
-	}, []);
 
 	return (
-		<Layout {...state}>
+		<Layout>
 			{/* Todo lo que se ponga aca será el contenido dinamico querecibira como 
       props el Layout */}
 			<div className="professionals-list">

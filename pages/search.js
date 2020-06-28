@@ -2,59 +2,49 @@ import React, { useContext, useEffect, useState } from "react";
 import Layout from "../components/layout/Layout";
 import ProfessionalDetails from "../components/layout/ProfessionalDetails";
 import { useRouter } from "next/router";
-import axios from 'axios';
+import axios from "axios";
 
-const Search = (props) => {
+const Search = () => {
 	const router = useRouter();
-	const [state, setState] = useState(props);
-
 
 	const {
 		query: { q },
 	} = router;
 
-	const [ professionalsTurns, setData ] = useState([]);
+	const [professionalsTurns, setData] = useState([]);
 
-	function getData()  {
-		const url = 'http://localhost:8080/user/category?categoryName='+q;
+	function getData() {
+		const url = "http://localhost:8080/user/category?categoryName=" + q;
 
 		console.log(url);
 		const res = axios.get(url);
+		console.log(res);
 		return res;
 	}
 
 	useEffect(() => {
-
-		setState({
-			firstName: sessionStorage.getItem("firstName"),
-			isLogged: sessionStorage.getItem("isLogged")
-		})
-			getData().then(res => {
-				console.log(res);
-				setData(res.data);
-			});
+		
+		getData().then((res) => {
+			console.log(res);
+			setData(res.data);
+		});
 	}, [q]);
-
+	console.log(professionalsTurns);
 	return (
 		<div>
-			<Layout {...state}>
+			<Layout>
 				<div className="professionals-list">
 					<div className="container">
 						<ul className="bg-white">
 							<h1> Listado de turnos por profesional </h1>
 
-							
-
 							{professionalsTurns
-								? 
-							
-								professionalsTurns.map( (professional) => (
-									
-									<ProfessionalDetails state={state}
+								? professionalsTurns.map((professional) => (
+										<ProfessionalDetails
 											key={professional.id}
 											professional={professional}
 										/>
-									 ))
+								  ))
 								: null}
 						</ul>
 					</div>
@@ -63,6 +53,5 @@ const Search = (props) => {
 		</div>
 	);
 };
-
 
 export default Search;

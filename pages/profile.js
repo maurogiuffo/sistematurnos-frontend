@@ -20,15 +20,6 @@ import { Formik } from "formik";
 // hacer validaciones
 const Profile = () => {
 	
-	const [state, setState] = useState({name:'',isLogged:''});
-
-	useEffect(() => {
-		setState({
-			name: sessionStorage.getItem("firstName"),
-			isLogged: sessionStorage.getItem("isLogged")
-		})
-	}, []);
-
 
 	const INITIAL_STATE = {
 		
@@ -56,9 +47,6 @@ const Profile = () => {
 	async function createLote() {
 		try {
 			const id = sessionStorage.getItem("userId");
-			console.log(
-				`${id} -- ${selectedDate} -- ${selectedTime} -- ${daysQuantity} -- ${turnsQuantity} -- ${duration}`
-			);
 			const getTurnsLote = async () => {
 				const url = "http://localhost:8080/turn/createLote";
 
@@ -72,6 +60,7 @@ const Profile = () => {
 				};
 
 				const lote = await axios.post(url, json);
+				console.log(lote);
 			};
 			getTurnsLote();
 		} catch (error) {
@@ -80,10 +69,9 @@ const Profile = () => {
 	}
 
 	return (
-		<div>
-			<Layout {...state}>
-			{state.isLogged  == 'true'? (
-				<>
+		
+			<Layout >
+			
 				<h1
 					css={css`
 						text-align: center;
@@ -154,9 +142,9 @@ const Profile = () => {
 						Crear Lote
 					</Button>
 				</Form>
-				</>):null}
+				
 			</Layout>
-		</div>
+		
 	);
 };
 

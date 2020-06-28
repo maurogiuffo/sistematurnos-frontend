@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import { css } from "@emotion/core";
@@ -6,6 +6,7 @@ import Search from "../ui/Search";
 import Navigation from "./Navigation";
 import Button from "../ui/Button";
 import  Router  from "next/router";
+import {AuthContext} from "../../context/authContext";
 
 const HeaderContainer = styled.header`
 	/* Aca estamos usando un color que establecimos de manera global en el Layout */
@@ -35,25 +36,20 @@ const Logo = styled.p`
 `;
 
 // Este Header se pegará en el Layout
-const Header = (props) => {
-	
-	const [state, setState] = useState(props);
+const Header = () => {
 
-	useEffect(() => {
-		setState({
-			name: sessionStorage.getItem("firstName"),
-			isLogged: sessionStorage.getItem("isLogged")
-		})
-	}, []);
+	const {isLogged, name, setIsLogged} = useContext(AuthContext);
 	
+
 	const logout = (e) => {	
+		setIsLogged(false);
 		sessionStorage.clear();
-		setState({
-			name: '',
-			isLogged : false,
-		});
 	}
+	useEffect(() => {	
+		
+	}, [isLogged]);
 
+	console.log(name);
 	return (
 		<HeaderContainer>
 			<DivMainContainer>
@@ -69,7 +65,7 @@ const Header = (props) => {
 
 					<Search />
 
-					<Navigation {...state} />
+					<Navigation />
 				</div>
 
 				<div
@@ -79,14 +75,14 @@ const Header = (props) => {
 					`}
 				>
 
-					{state.isLogged =='true' ? (
+					{isLogged === "true" ? (
 						<>
 							<p
 								css={css`
 									margin-right: 2rem;
 								`}
 							>
-								Hola {state.name}
+								Hola {name}
 							</p>
 						
 							<Button bgColor="true" onClick={logout} >Logout</Button>

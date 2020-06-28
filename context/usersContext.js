@@ -50,27 +50,7 @@ const UsersProvider = (props) => {
 		};
 	}, []);
 
-	/* const CancelToken = axios.CancelToken;
-    const source = CancelToken.source();
 
-    const loadData = () => {
-      try {
-        axios.get(RANDOM_USER_API, { cancelToken: source.token }).then(data => {
-          setUser(data.data);
-        });
-      } catch (error) {
-        if (axios.isCancel(error)) {
-          console.log("cancelled");
-        } else {
-          throw error;
-        }
-      }
-    };
-
-    loadData();
-    return () => {
-      source.cancel();
-    };*/
 
 	return (
 		// todo lo que se incluya aca es lo que se va a enviar
