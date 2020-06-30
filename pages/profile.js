@@ -45,6 +45,7 @@ const Profile = () => {
 	
 	const { selectedDate, selectedTime, daysQuantity, turnsQuantity, duration  } = values;
 	console.log(values);
+	console.log(id);
 	async function createLote() {
 		try {
 			
@@ -54,8 +55,8 @@ const Profile = () => {
 				let json = {
 					userId: id,
 					fechaDesde: selectedDate + "T" + selectedTime,
-					cantDias: daysQuantity,
-					cantTurnos: turnsQuantity,
+					cantidadDias: daysQuantity,
+					cantidadTurnos: turnsQuantity,
 					duracionTurno: duration,
 					//cliente: client,
 				};

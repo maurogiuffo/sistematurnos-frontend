@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useContext} from "react";
 import Button from "@material-ui/core/Button";
 import { AuthContext } from "../../context/authContext";
+import NestedGrid from "../ui/Grid";
 
-const TurnDetails = () => {
+const TurnDetails = ({turn}) => {
 	const { isLogged } = useContext(AuthContext);
 	const { id, turnDate } = turn;
 
 	return (
 		<table>
-			<thead>
+			<NestedGrid />
+			{/* <thead>
 				<tr>
 					<th>Fecha</th>
 					<th>Hora</th>
@@ -21,11 +23,11 @@ const TurnDetails = () => {
 					<td>{turnDate.substr(11, 5)}</td>
 					{isLogged === "true" ? (
 						<td>
-							<Button variant="contained" type="submit"></Button>
+							<Button variant="contained" type="submit"> Solicitar </Button>
 						</td>
 					) : null}
 				</tr>
-			</tbody>
+			</tbody> */}
 		</table>
 	);
 };
