@@ -2,7 +2,7 @@
 import Header from "./Header";
 import { Global, css } from "@emotion/core";
 import Head from "next/head";
-import React, { createContext, useState, useEffect } from "react";
+import React from "react";
 
 // Este va a ser el componente principal
 //Todo lo que este fuera del <main> es el contenido que se

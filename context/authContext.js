@@ -10,20 +10,24 @@ const AuthProvider = (props) => {
     // crear state del context
     const [ isLogged, setIsLogged ] = useState(false);
     const [ name, setName ] = useState("");
+    const [id, setId] = useState(null);
     
     // ejecutar llamado a la api
     useEffect(() => {
-        
+        console.log(`En context el isLogged es: ${isLogged}`);
+         
     }, [isLogged]); // El array vacio para que solo se ejecute una vez para cargar todas las categorias
 
-    console.log(isLogged);
+    
     return (
         <AuthContext.Provider
             value= {{ 
                 setName,
                 setIsLogged,
                 isLogged,
-                name
+                name,
+                id,
+                setId
             }}
         >   
             {props.children} 

@@ -11,7 +11,6 @@ const useValidation = (initialState, toValidate, fn ) => {
     // cuando se haga submit el estado cambiara a true y usamos un useEffect para ejecutar el codigo
     const [ submitForm, setSubmitForm ] = useState(false);
 
-    const {setIsLogged,setName} = useContext(AuthContext)
     // cuando importemos desde pages register, login... al hacer submit
     // submitForm cambiará su estado a true y se ejecutaran las validaciones
 
@@ -24,8 +23,6 @@ const useValidation = (initialState, toValidate, fn ) => {
                 fn(); // Fn = Función que se ejecuta en el componente   
                 
                 if(fn.name === "login"){
-                    setName(sessionStorage.getItem("firsName"))
-                    setIsLogged(sessionStorage.getItem("isLogged"));
                     Router.push('/');
                 }else if(fn.name === "createAccount"){
                     Router.push("/login");

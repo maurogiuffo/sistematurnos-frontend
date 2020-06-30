@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { css } from "@emotion/core";
 import axios from "axios";
 import Layout from "../components/layout/Layout";
@@ -15,12 +15,13 @@ import TextField from "@material-ui/core/TextField";
 
 import Button from "@material-ui/core/Button";
 import { Formik } from "formik";
+import { AuthContext } from "../context/authContext";
 
 
 // hacer validaciones
 const Profile = () => {
 	
-
+	const { id } = useContext(AuthContext);
 	const INITIAL_STATE = {
 		
 		selectedDate: "25/6/2020",
@@ -41,12 +42,12 @@ const Profile = () => {
 	} = useValidation(INITIAL_STATE, validateTurnsLote, createLote);
 
 	// Extraemos los values
-
-	const { selectedDate, selectedTime, daysQuantity, turnsQuantity, duration,  } = values;
-
+	
+	const { selectedDate, selectedTime, daysQuantity, turnsQuantity, duration  } = values;
+	console.log(values);
 	async function createLote() {
 		try {
-			const id = sessionStorage.getItem("userId");
+			
 			const getTurnsLote = async () => {
 				const url = "http://localhost:8080/turn/createLote";
 

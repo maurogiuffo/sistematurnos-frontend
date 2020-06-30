@@ -58,7 +58,9 @@ const Login = () => {
 	}
 
 	return (
+		
 		<Layout>
+			{console.log("Render en Login")};
 			{/* Todo lo que se ponga aca será el contenido dinamico querecibira como 
       props el Layout */}
 

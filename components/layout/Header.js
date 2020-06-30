@@ -38,15 +38,18 @@ const Logo = styled.p`
 // Este Header se pegará en el Layout
 const Header = () => {
 
-	const {isLogged, name, setIsLogged} = useContext(AuthContext);
+	const {isLogged, name, setIsLogged, setName} = useContext(AuthContext);
 	
 
-	const logout = (e) => {	
+	const logout = () => {	
+		
 		setIsLogged(false);
+		setName("");
 		sessionStorage.clear();
 	}
+	
 	useEffect(() => {	
-		
+	
 	}, [isLogged]);
 
 	console.log(name);
@@ -85,7 +88,7 @@ const Header = () => {
 								Hola {name}
 							</p>
 						
-							<Button bgColor="true" onClick={logout} >Logout</Button>
+							<Button bgColor="true" onClick={() => logout()} >Logout</Button>
 						
 						</>
 					) : (

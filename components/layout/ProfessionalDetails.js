@@ -1,4 +1,4 @@
-import React , { useContext , useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import Link from "next/link";
 import { AuthContext } from "../../context/authContext";
@@ -29,15 +29,11 @@ const Name = styled.a`
 	}
 `;
 
-const ProfessionalDetails = ({ professional}) => {
+const ProfessionalDetails = ({ professional }) => {
 
-    const {isLogged} = useContext(AuthContext);	
-	const { id, firstName, lastName, email ,professional_turns} = professional;
+	const { id, firstName, lastName, email, professional_turns } = professional;
 
-	useEffect(() => {
-		
-	}, [])
-
+	useEffect(() => {}, []);
 
 	return (
 		<Content>
@@ -48,31 +44,19 @@ const ProfessionalDetails = ({ professional}) => {
 					</Name>
 				</Link>
 				<div>
-					<p>{email}</p>	
+					<p>{email}</p>
 				</div>
 				<div>
-					<p>
-						<table>
-						<th>
-							<td >Fecha</td>
-							<td>Hora</td>
-							<td>Asignado</td>
-						</th>	
-						<tr>
-					{professional_turns
-								? 
-								professional_turns.map( (turn) => (
-									<TurnDetails 
+				
+							{professional_turns
+								? professional_turns.map((turn) => (
+										<TurnDetails
 											key={turn.id}
 											turn={turn}
-											isLogged={isLogged}
 										/>
-									 ))
+								  ))
 								: null}
-					</tr>
-					</table>
-
-					</p>
+					
 				</div>
 			</Description>
 		</Content>
