@@ -6,6 +6,7 @@ import axios from "axios";
 
 const TurnDetails = ({turn}) => {
 	const { isLogged } = useContext(AuthContext);
+	const { userId } = useContext(AuthContext);
 	const { id, turnDate } = turn;
 
 
@@ -14,7 +15,7 @@ const TurnDetails = ({turn}) => {
 
 		var json=
 			{
-				userId:id,
+				userId:userId,
 				turnId:id
 			}
 		
@@ -26,10 +27,10 @@ const TurnDetails = ({turn}) => {
 
 	const solicitar = (id) => {	
 		
-		alert("solicitar turno " +id );
+		alert("userid "+ userId +"solicitar turno " +id );
 
 		post(id).then((res) => {
-			alert("respuesta turno " +id );
+			alert("userid "+ userId +" respuesta turno " +id );
 			console.log(res);
 			//setData(res.data);
 		});

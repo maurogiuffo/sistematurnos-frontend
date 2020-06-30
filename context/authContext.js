@@ -11,7 +11,7 @@ const AuthProvider = (props) => {
     const [ isLogged, setIsLogged ] = useState(false);
     const [ name, setName ] = useState("");
     const [id, setId] = useState(null);
-    
+    const [userId, setUserId] = useState(null);
     // ejecutar llamado a la api
     useEffect(() => {
         console.log(`En context el isLogged es: ${isLogged}`);
@@ -27,7 +27,9 @@ const AuthProvider = (props) => {
                 isLogged,
                 name,
                 id,
-                setId
+                setId,
+                userId,
+                setUserId
             }}
         >   
             {props.children} 

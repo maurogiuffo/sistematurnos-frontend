@@ -7,12 +7,13 @@ import { AuthContext } from "../context/authContext";
 
 const Home = () => {
 	const { professionals } = useContext(UsersContext);
-	const { setIsLogged, setName,setId } = useContext(AuthContext);
+	const { setIsLogged, setName,setId,setUserId } = useContext(AuthContext);
 
 	useEffect(() => {
 		setIsLogged(sessionStorage.getItem("isLogged"));
 		setName(sessionStorage.getItem("firstName"));
 		setId(sessionStorage.getItem("userId"));
+		setUserId(sessionStorage.getItem("userId"));
 	}, []);
 
 	return (
