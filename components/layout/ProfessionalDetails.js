@@ -73,11 +73,12 @@ const ProfessionalDetails = ({ professional }) => {
 								  ))
 								: null}
 						</tbody>
-					</table>
-					<div class="rg-source">
+								</table>
+									<div class="rg-source">
 						<span class="pre-colon">SOURCE</span>:{" "}
 						<span class="post-colon">Sources</span>
 					</div>
+				
 				</div>
 			</Description>
 		</Content>

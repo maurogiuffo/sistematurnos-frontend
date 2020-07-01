@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect,useState } from "react";
 import Button from "@material-ui/core/Button";
 import { AuthContext } from "../../context/authContext";
 import axios from "axios";
@@ -7,7 +7,8 @@ import moment from "moment";
 const TurnDetails = ({ turn }) => {
 	const { isLogged, userId } = useContext(AuthContext);
 
-	const { id, turnDate } = turn;
+	const [state , setState] = useState(false);
+	const { id, turnDate, professionalId ,customerId } = turn;
 	console.log(turn);
 
 	//////////////////////////////////
@@ -21,61 +22,96 @@ const TurnDetails = ({ turn }) => {
 	}
 
 	////////////////////////////////////////
-	const post = async (id) => {
-		const url = "http://localhost:8080/turn/addCustomerTurn/";
 
-		var json = {
-			userId: userId,
-			turnId: id,
-		};
-
-		const res = await axios.post(url, json);
-		return res;
-	};
 
 	useEffect(() => {
-		if(turnDate !== null){
+		/*if(turnDate !== null){
 			orderTurn();
-		}	
+		}*/	
 	}, [])
 		
 
-	const solicitar = (id) => {
-		alert("userid " + userId + "solicitar turno " + id);
+	const solicitar = (turn) => {
+
+		const post = async (id) => {
+			const url = "http://localhost:8080/turn/addCustomerTurn/";
+	
+			var json = {
+				userId: userId,
+				turnId: id,
+			};
+	
+			const res = await axios.post(url, json);
+			return res;
+		};
+
+
 
 		post(id).then((res) => {
 			alert("userid " + userId + " respuesta turno " + id);
+			turn.customerId
 			console.log(res);
-			//setData(res.data);
+			setState(true)
+			
 		});
 	};
 
+	const eliminar = (id) => {
+
+		const post = async (id) => {
+			const url = "http://localhost:8080/turn/deleteTurn/";
 	
+			var json = {
+				id: id,
+			};
+	
+			const res = await axios.post(url, json);
+			return res;
+		};
+
+
+		post(id).then((res) => {
+			alert("userid " + userId + " respuesta turno " + id);
+			turn.customerId
+			console.log(res);
+			setState(true)
+			
+		});
+	};
+
 
 
 	return (
 		<>
-			{/* 
-			{turnDate.substr(0, 10)} - {turnDate.substr(11, 5)}
-			{isLogged === "true" ? (
+			<tr>
+
+		
+			<td>{id} - {turnDate.substr(0, 10)} - </td>
+			<td> {turnDate.substr(11, 5)}</td>
+			
+			
+			<td>
+
+			{isLogged === "true" && customerId == null && userId !== professionalId && state=== false? (
+
 				<Button variant="contained" onClick={() => solicitar(id)}>
 					{" "}
 					Solicitar{" "}
 				</Button>
-			) : null} */}
+			) : null} 
+			
+			{isLogged === "true" && userId === professionalId && state === false? (
 
-			<tr class="">
-				<td class="text " data-title="Horarios">
-					{turnDate.substr(11, 5)}
-				</td>
-				<td class=" " data-title="Lun" id="lun"></td>
-				<td class=" " data-title="Mar" id="mar"></td>
-				<td class=" " data-title="Mie" id="mié"></td>
-				<td class=" " data-title="Jue" id="jue"></td>
-				<td class=" " data-title="Vie" id="vie"></td>
-				<td class=" " data-title="Sab" id="sáb"></td>
-				<td class=" " data-title="Dom" id="dom"></td>
+				<Button variant="contained" onClick={() => eliminar(id)}>
+					{" "}
+					Eliminar{" "}
+				</Button>
+				) : null} 
+			
+			</td>
+			
 			</tr>
+			
 		</>
 	);
 };
