@@ -12,6 +12,7 @@ const AuthProvider = (props) => {
     const [ name, setName ] = useState("");
     const [id, setId] = useState(null);
     const [userId, setUserId] = useState(null);
+    const [userType, setUserType] = useState(null);
     // ejecutar llamado a la api
     useEffect(() => {
         console.log(`En context el isLogged es: ${isLogged}`);
@@ -29,7 +30,9 @@ const AuthProvider = (props) => {
                 id,
                 setId,
                 userId,
-                setUserId
+                setUserId,
+                userType,
+                setUserType
             }}
         >   
             {props.children} 

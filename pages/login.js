@@ -48,7 +48,7 @@ const Login = () => {
 				sessionStorage.setItem("firstName", res.data.user.firstName);
 				sessionStorage.setItem("lastName", res.data.user.lastName);
 				sessionStorage.setItem("email", res.data.user.email);
-				sessionStorage.setItem("userType", res.data.user.userType);
+				sessionStorage.setItem("userType", res.data.user.usertype);
 				sessionStorage.setItem("isLogged", true);
 			});
 

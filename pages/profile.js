@@ -21,7 +21,7 @@ import { AuthContext } from "../context/authContext";
 // hacer validaciones
 const Profile = () => {
 	
-	const { id } = useContext(AuthContext);
+	const { id, userType } = useContext(AuthContext);
 	const INITIAL_STATE = {
 		
 		selectedDate: "25/6/2020",
@@ -74,14 +74,23 @@ const Profile = () => {
 		
 			<Layout >
 			
+
+{userType == 'PROFESSIONAL'? (
+<>
 				<h1
 					css={css`
 						text-align: center;
 						margin-top: 5rem;
 					`}
 				>
+
+
+
+
 					Crear Lote de Turnos
 				</h1>
+
+
 
 				<Form onSubmit={handleSubmit} novalidate>
 					<TextField
@@ -144,7 +153,8 @@ const Profile = () => {
 						Crear Lote
 					</Button>
 				</Form>
-				
+				</>
+) : null}
 			</Layout>
 		
 	);
