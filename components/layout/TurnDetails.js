@@ -8,8 +8,11 @@ const TurnDetails = ({ turn }) => {
 	const { isLogged, userId } = useContext(AuthContext);
 
 	const [state , setState] = useState(false);
+	const [lastId , setLastId] = useState(sessionStorage.getItem("lastTurnId"));
+
 	const { id, turnDate, professionalId ,customerId } = turn;
-	console.log(turn);
+	
+	console.log(lastId);
 
 	//////////////////////////////////
 	function orderTurn(turnDate) {
@@ -25,6 +28,8 @@ const TurnDetails = ({ turn }) => {
 
 
 	useEffect(() => {
+		sessionStorage.setItem("lastTurnId",turnDate.substr(0, 10))
+	
 		/*if(turnDate !== null){
 			orderTurn();
 		}*/	
@@ -83,13 +88,20 @@ const TurnDetails = ({ turn }) => {
 
 	return (
 		<>
-			<tr>
-
 		
+		{lastId != turnDate.substr(0, 10) ? (
+			
+			
+			<tr></tr>
+		) : null  }
+		
+		{sessionStorage.setItem("lastTurnId",turnDate.substr(0, 10))}	
+
+
 			<td>{id} - {turnDate.substr(0, 10)} - </td>
 			<td> {turnDate.substr(11, 5)}</td>
 			
-			
+	
 			<td>
 
 			{isLogged === "true" && customerId == null && userId !== professionalId && state=== false? (
@@ -110,7 +122,7 @@ const TurnDetails = ({ turn }) => {
 			
 			</td>
 			
-			</tr>
+		
 			
 		</>
 	);
