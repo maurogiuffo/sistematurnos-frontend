@@ -53,7 +53,7 @@ const TurnDetails = ({ turn }) => {
 
 
 		post(id).then((res) => {
-			alert("userid " + userId + " respuesta turno " + id);
+			alert("Turno Solicitado ! " + id);
 			turn.customerId
 			console.log(res);
 			setState(true)
@@ -76,7 +76,7 @@ const TurnDetails = ({ turn }) => {
 
 
 		post(id).then((res) => {
-			alert("userid " + userId + " respuesta turno " + id);
+			alert(" Turno eliminado! " + id);
 			turn.customerId
 			console.log(res);
 			setState(true)
@@ -91,18 +91,15 @@ const TurnDetails = ({ turn }) => {
 		
 		{lastId != turnDate.substr(0, 10) ? (
 			
-			
-			<tr><td>{id} - {turnDate.substr(0, 10)} - </td></tr>
+			<tr><td colspan = '3'>{turnDate.substr(0, 10)}</td></tr>
 			
 		) : null  }
 		
 		{sessionStorage.setItem("lastTurnId",turnDate.substr(0, 10))}	
 
 
-			
 			<td> {turnDate.substr(11, 5)}</td>
-			
-	
+
 			<td>
 
 			{isLogged === "true" && customerId == 0 && userId != professionalId && state=== false? (
