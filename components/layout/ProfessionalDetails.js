@@ -30,7 +30,7 @@ const Name = styled.a`
 `;
 
 const ProfessionalDetails = ({ professional }) => {
-	const { id, firstName, lastName, email, professional_turns } = professional;
+	const { id, firstName, lastName, email, professionalTurns } = professional;
 
 	useEffect(() => {}, []);
 
@@ -44,28 +44,21 @@ const ProfessionalDetails = ({ professional }) => {
 				</Link>
 				<div class="rg-container">
 					<table class="rg-table zebra" summary="Hed">
-						<caption class="rg-header">
-							<span class="rg-hed">Turnos</span>
+						<caption className="rg-header">
+							<span className="rg-hed">Turnos</span>
 							
 						</caption>
 						<thead>
 							<tr>
-								<th class="text ">Horarios</th>
-								<th class=" ">Lun</th>
-								<th class=" ">Mar</th>
-								<th class=" ">Mier</th>
-								<th class=" ">Jue</th>
-								<th class=" ">Vie</th>
-								<th class=" ">Sab</th>
-								<th class=" ">Dom</th>
+							
 							</tr>
 						</thead>
 						<tbody>
 						<tr class="">
 						
 						</tr>
-							{professional_turns
-								? professional_turns.map((turn) => (
+							{professionalTurns
+								? professionalTurns.map((turn) => (
 										<TurnDetails
 											key={turn.id}
 											turn={turn}

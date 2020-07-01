@@ -11,8 +11,8 @@ const TurnDetails = ({ turn }) => {
 	const [lastId , setLastId] = useState(sessionStorage.getItem("lastTurnId"));
 
 	const { id, turnDate, professionalId ,customerId } = turn;
-	
-	console.log(lastId);
+
+	console.log(userId +professionalId);
 
 	//////////////////////////////////
 	function orderTurn(turnDate) {
@@ -92,19 +92,20 @@ const TurnDetails = ({ turn }) => {
 		{lastId != turnDate.substr(0, 10) ? (
 			
 			
-			<tr></tr>
+			<tr><td>{id} - {turnDate.substr(0, 10)} - </td></tr>
+			
 		) : null  }
 		
 		{sessionStorage.setItem("lastTurnId",turnDate.substr(0, 10))}	
 
 
-			<td>{id} - {turnDate.substr(0, 10)} - </td>
+			
 			<td> {turnDate.substr(11, 5)}</td>
 			
 	
 			<td>
 
-			{isLogged === "true" && customerId == null && userId !== professionalId && state=== false? (
+			{isLogged === "true" && customerId == 0 && userId != professionalId && state=== false? (
 
 				<Button variant="contained" onClick={() => solicitar(id)}>
 					{" "}
@@ -112,7 +113,7 @@ const TurnDetails = ({ turn }) => {
 				</Button>
 			) : null} 
 			
-			{isLogged === "true" && userId === professionalId && state === false? (
+			{isLogged === "true" && userId == professionalId && state === false? (
 
 				<Button variant="contained" onClick={() => eliminar(id)}>
 					{" "}
@@ -121,9 +122,7 @@ const TurnDetails = ({ turn }) => {
 				) : null} 
 			
 			</td>
-			
-		
-			
+
 		</>
 	);
 };
